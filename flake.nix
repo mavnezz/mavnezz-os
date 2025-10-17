@@ -11,13 +11,7 @@
     nvf.url = "github:notashelf/nvf";
     stylix.url = "github:danth/stylix/release-25.05";
     flake-utils.url = "github:numtide/flake-utils";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    quickshell.url = "github:outfoxxed/quickshell";
+    vicinae.url = "github:vicinaehq/vicinae/24a71cac107f9b42f70ec2015e41ef02f617b1f1";
   };
 
   outputs = {nixpkgs, nixpkgs-unstable, flake-utils, ...} @ inputs: let
@@ -35,28 +29,29 @@
           system = "x86_64-linux";
           config.allowUnfree = true;
         };
-        zen-browser = inputs.zen-browser.packages.${system}.default;
       };
       modules = [./profiles/${profile}];
     };
 
   in {
     nixosConfigurations = {
-      # GPU-based configurations (legacy)
-      amd = mkHost { hostname = "nixos-leno"; profile = "amd"; username = "don"; };
-      nvidia = mkHost { hostname = "nixos-leno"; profile = "nvidia"; username = "don"; };
-      nvidia-laptop = mkHost { hostname = "nixos-leno"; profile = "nvidia-laptop"; username = "don"; };
-      intel = mkHost { hostname = "nixos-leno"; profile = "intel"; username = "don"; };
-      vm = mkHost { hostname = "nixos-leno"; profile = "vm"; username = "don"; };
+      # GPU-based configurations for default host
+      amd = mkHost { hostname = "default"; profile = "amd"; username = "user"; };
+      nvidia = mkHost { hostname = "default"; profile = "nvidia"; username = "user"; };
+      nvidia-laptop = mkHost { hostname = "default"; profile = "nvidia-laptop"; username = "user"; };
+      intel = mkHost { hostname = "default"; profile = "intel"; username = "user"; };
+      vm = mkHost { hostname = "default"; profile = "vm"; username = "user"; };
+
+      # Default host configuration
+      default = mkHost { hostname = "default"; profile = "nvidia-laptop"; username = "user"; };
 
       # Host-specific configurations
-      nixos-leno = mkHost { hostname = "nixos-leno"; profile = "nvidia-laptop"; username = "don"; };
-      nix-desktop = mkHost { hostname = "nix-desktop"; profile = "nvidia"; username = "don"; };
-      nix-deck = mkHost { hostname = "nix-deck"; profile = "amd"; username = "don"; };
-      nix-lab = mkHost { hostname = "nix-lab"; profile = "intel"; username = "don"; };
+      # Add new hosts here during installation
+      homework = mkHost { hostname = "homework"; profile = "intel"; username = "sirjuls44"; };
+      deck = mkHost { hostname = "deck"; profile = "amd"; username = "don"; };
     };
 
-    # Flutter development environment
+    # Flutter development environment (conditional per host)
     devShells = flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs-unstable {
@@ -73,9 +68,15 @@
           abiVersions = [ "arm64-v8a" ];
         };
         androidSdk = androidComposition.androidsdk;
-      in
-      {
-        default = with pkgs; mkShell rec {
+
+        # Check if any host has flutter development enabled
+        hostHasFlutter = hostname:
+          let
+            hostVars = import ./hosts/${hostname}/variables.nix;
+          in
+            hostVars.flutterdevEnable or false;
+
+        flutterShell = with pkgs; mkShell rec {
           ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
           buildInputs = [
             flutter
@@ -83,6 +84,11 @@
             jdk11
           ];
         };
+      in
+      {
+        default = if (hostHasFlutter "default")
+                  then flutterShell
+                  else pkgs.mkShell { buildInputs = []; };
       });
   };
 }

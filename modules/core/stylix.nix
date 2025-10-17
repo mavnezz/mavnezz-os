@@ -4,31 +4,32 @@
   lib,
   ...
 }: let
-  inherit (import ../../hosts/${host}/variables.nix) stylixImage stylixEnable;
+  inherit (import ../../hosts/${host}/variables.nix) stylixEnable stylixImage;
 in
 lib.mkIf stylixEnable {
   # Styling Options
   stylix = {
     enable = true;
+    # Manual dark color scheme (no wallpaper)
+    #base16Scheme = {
+    #base00 = "000000";  # Pure black background
+    #base01 = "1a1a1a";  # Dark gray
+    #base02 = "2a2a2a";  # Lighter gray
+    #base03 = "3a3a3a";  # Medium gray
+    #base04 = "6a6a6a";  # Light gray
+    #base05 = "d0d0d0";  # Very light gray (text)
+    #base06 = "e0e0e0";  # Almost white
+    #base07 = "ffffff";  # Pure white
+    #base08 = "8c9440";  # Muted green (errors/delete)
+    #base09 = "de935f";  # Muted orange (warnings)
+    #base0A = "f0c674";  # Muted yellow (search)
+    #base0B = "b5bd68";  # Muted green (strings/added)
+    #base0C = "8abeb7";  # Muted cyan (regex/escape)
+    #base0D = "81a2be";  # Muted blue (functions)
+    #base0E = "b294bb";  # Muted purple (keywords)
+    #base0F = "a3685a";  # Muted brown (deprecated)
+    #};
     image = stylixImage;
-    # base16Scheme = {
-    #   base00 = "282936";
-    #   base01 = "3a3c4e";
-    #   base02 = "4d4f68";
-    #   base03 = "626483";
-    #   base04 = "62d6e8";
-    #   base05 = "e9e9f4";
-    #   base06 = "f1f2f8";
-    #   base07 = "f7f7fb";
-    #   base08 = "ea51b2";
-    #   base09 = "b45bcf";
-    #   base0A = "00f769";
-    #   base0B = "ebff87";
-    #   base0C = "a1efe4";
-    #   base0D = "62d6e8";
-    #   base0E = "b45bcf";
-    #   base0F = "00f769";
-    # };
     polarity = "dark";
     opacity.terminal = 1.0;
     cursor = {

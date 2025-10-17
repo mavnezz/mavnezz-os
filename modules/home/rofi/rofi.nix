@@ -21,19 +21,19 @@
         inherit (config.lib.formats.rasi) mkLiteral;
       in {
         "*" = {
-          bg = mkLiteral "#1d1c2c";
-          bg-alt = mkLiteral "#1d1c2cCC";
-          foreground = mkLiteral "#${config.stylix.base16Scheme.base01}";
-          selected = mkLiteral "#${config.stylix.base16Scheme.base08}";
-          active = mkLiteral "#${config.stylix.base16Scheme.base0B}";
-          text-selected = mkLiteral "#${config.stylix.base16Scheme.base00}";
+          bg = mkLiteral "#${config.stylix.base16Scheme.base00}E6";
+          bg-alt = mkLiteral "#${config.stylix.base16Scheme.base02}";
+          foreground = mkLiteral "#${config.stylix.base16Scheme.base05}";
+          selected = mkLiteral "#${config.stylix.base16Scheme.base03}";
+          active = mkLiteral "#${config.stylix.base16Scheme.base03}";
+          text-selected = mkLiteral "#${config.stylix.base16Scheme.base05}";
           text-color = mkLiteral "#${config.stylix.base16Scheme.base05}";
-          border-color = mkLiteral "#${config.stylix.base16Scheme.base0F}";
-          urgent = mkLiteral "#${config.stylix.base16Scheme.base0E}";
+          border-color = mkLiteral "#${config.stylix.base16Scheme.base03}";
+          urgent = mkLiteral "#${config.stylix.base16Scheme.base04}";
         };
         "window" = {
           transparency = "real";
-          width = mkLiteral "500px";
+          width = mkLiteral "1000px";
           location = mkLiteral "center";
           anchor = mkLiteral "center";
           fullscreen = false;
@@ -41,26 +41,48 @@
           y-offset = mkLiteral "0px";
           cursor = "default";
           enabled = true;
-          border-radius = mkLiteral "4px";
-          background-color = mkLiteral "#1d1c2cD9";
+          border-radius = mkLiteral "15px";
+          background-color = mkLiteral "@bg";
         };
         "mainbox" = {
           enabled = true;
-          spacing = mkLiteral "20px";
+          spacing = mkLiteral "0px";
+          orientation = mkLiteral "horizontal";
+          children = map mkLiteral [
+            "imagebox"
+            "listbox"
+          ];
+          background-color = mkLiteral "transparent";
+        };
+        "imagebox" = {
           padding = mkLiteral "20px";
+          background-color = mkLiteral "transparent";
+          #background-image = mkLiteral ''url("~/Pictures/Wallpapers/Rainnight.jpg", height)'';   # uncomment to use image as background
           orientation = mkLiteral "vertical";
           children = map mkLiteral [
             "inputbar"
-            "listview"
+            "dummy"
             "mode-switcher"
           ];
+        };
+        "listbox" = {
+          spacing = mkLiteral "20px";
+          padding = mkLiteral "20px";
+          background-color = mkLiteral "transparent";
+          orientation = mkLiteral "vertical";
+          children = map mkLiteral [
+            "message"
+            "listview"
+          ];
+        };
+        "dummy" = {
           background-color = mkLiteral "transparent";
         };
         "inputbar" = {
           enabled = true;
           spacing = mkLiteral "10px";
           padding = mkLiteral "10px";
-          border-radius = mkLiteral "4px";
+          border-radius = mkLiteral "10px";
           background-color = mkLiteral "@bg-alt";
           text-color = mkLiteral "@foreground";
           children = map mkLiteral [
@@ -85,18 +107,16 @@
         };
         "mode-switcher" = {
           enabled = true;
-          spacing = mkLiteral "10px";
+          spacing = mkLiteral "20px";
           background-color = mkLiteral "transparent";
           text-color = mkLiteral "@foreground";
-          orientation = mkLiteral "horizontal";
         };
         "button" = {
-          padding = mkLiteral "12px 20px";
-          border-radius = mkLiteral "4px";
+          padding = mkLiteral "15px";
+          border-radius = mkLiteral "10px";
           background-color = mkLiteral "@bg-alt";
           text-color = mkLiteral "inherit";
           cursor = mkLiteral "pointer";
-          horizontal-align = mkLiteral "0.5";
         };
         "button selected" = {
           background-color = mkLiteral "@selected";
@@ -105,7 +125,7 @@
         "listview" = {
           enabled = true;
           columns = 1;
-          lines = 4;
+          lines = 8;
           cycle = true;
           dynamic = true;
           scrollbar = false;
@@ -122,7 +142,7 @@
           enabled = true;
           spacing = mkLiteral "15px";
           padding = mkLiteral "8px";
-          border-radius = mkLiteral "4px";
+          border-radius = mkLiteral "10px";
           background-color = mkLiteral "transparent";
           text-color = mkLiteral "@text-color";
           cursor = mkLiteral "pointer";

@@ -5,98 +5,142 @@
     enable = true;
     layout = [
       {
+        label = "lock";
+        action = "sleep 1; hyprlock";
+        text = "Lock";
+        keybind = "l";
+      }
+      {
+        label = "logout";
+        action = "sleep 1; hyprctl dispatch exit";
+        text = "Logout";
+        keybind = "e";
+      }
+      {
+        label = "suspend";
+        action = "sleep 1; systemctl suspend";
+        text = "Suspend";
+        keybind = "u";
+      }
+      {
         label = "shutdown";
         action = "sleep 1; systemctl poweroff";
         text = "Shutdown";
         keybind = "s";
       }
       {
-        "label" = "reboot";
-        "action" = "sleep 1; systemctl reboot";
-        "text" = "Reboot";
-        "keybind" = "r";
+        label = "hibernate";
+        action = "sleep 1; systemctl hibernate";
+        text = "Hibernate";
+        keybind = "h";
       }
       {
-        "label" = "logout";
-        "action" = "sleep 1; hyprctl dispatch exit";
-        "text" = "Exit";
-        "keybind" = "e";
-      }
-      {
-        "label" = "suspend";
-        "action" = "sleep 1; systemctl suspend";
-        "text" = "Suspend";
-        "keybind" = "u";
-      }
-      {
-        "label" = "lock";
-        "action" = "sleep 1; hyprlock";
-        "text" = "Lock";
-        "keybind" = "l";
-      }
-      {
-        "label" = "hibernate";
-        "action" = "sleep 1; systemctl hibernate";
-        "text" = "Hibernate";
-        "keybind" = "h";
+        label = "reboot";
+        action = "sleep 1; systemctl reboot";
+        text = "Reboot";
+        keybind = "r";
       }
     ];
     style = ''
       * {
-        font-family: "JetBrainsMono NF", FontAwesome, sans-serif;
-      	background-image: none;
-      	transition: 20ms;
+        background-image: none;
+        font-size: 16px;
       }
+
       window {
-      	background-color: rgba(12, 12, 12, 0.1);
+        background-color: transparent;
       }
+
       button {
-      	color: #${config.lib.stylix.colors.base05};
-        font-size:20px;
+        color: #${config.lib.stylix.colors.base05};
+        background-color: #${config.lib.stylix.colors.base00};
+        outline-style: none;
+        border: none;
+        border-width: 0px;
         background-repeat: no-repeat;
-      	background-position: center;
-      	background-size: 25%;
-      	border-style: solid;
-      	background-color: rgba(12, 12, 12, 0.3);
-      	border: 3px solid #${config.lib.stylix.colors.base05};
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-position: center;
+        background-size: 25%;
+        border-radius: 0px;
+        box-shadow: none;
+        text-shadow: none;
       }
-      button:focus,
-      button:active,
+
+      button:focus {
+        background-color: #${config.lib.stylix.colors.base02};
+        background-size: 30%;
+      }
+
       button:hover {
-        color: #${config.lib.stylix.colors.base0B};
-        background-color: rgba(12, 12, 12, 0.5);
-        border: 3px solid #${config.lib.stylix.colors.base0B};
+        background-color: #${config.lib.stylix.colors.base03};
+        background-size: 40%;
+        border-radius: 12px;
+        transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
       }
-      #logout {
-      	margin: 10px;
-      	border-radius: 20px;
-      	background-image: image(url("icons/logout.png"));
+
+      button:hover#lock {
+        border-radius: 12px;
+        margin: -10px 0px -10px 10px;
       }
-      #suspend {
-      	margin: 10px;
-      	border-radius: 20px;
-      	background-image: image(url("icons/suspend.png"));
+
+      button:hover#logout {
+        border-radius: 12px;
+        margin: -10px 0px -10px 0px;
       }
-      #shutdown {
-      	margin: 10px;
-      	border-radius: 20px;
-      	background-image: image(url("icons/shutdown.png"));
+
+      button:hover#suspend {
+        border-radius: 12px;
+        margin: -10px 0px -10px 0px;
       }
-      #reboot {
-      	margin: 10px;
-      	border-radius: 20px;
-      	background-image: image(url("icons/reboot.png"));
+
+      button:hover#shutdown {
+        border-radius: 12px;
+        margin: -10px 0px -10px 0px;
       }
+
+      button:hover#hibernate {
+        border-radius: 12px;
+        margin: -10px 0px -10px 0px;
+      }
+
+      button:hover#reboot {
+        border-radius: 12px;
+        margin: -10px 10px -10px 0px;
+      }
+
       #lock {
-      	margin: 10px;
-      	border-radius: 20px;
-      	background-image: image(url("icons/lock.png"));
+        background-image: image(url("icons/lock.png"));
+        border-radius: 12px 0px 0px 12px;
+        margin: 10px 0px 10px 10px;
       }
+
+      #logout {
+        background-image: image(url("icons/logout.png"));
+        border-radius: 0px;
+        margin: 10px 0px 10px 0px;
+      }
+
+      #suspend {
+        background-image: image(url("icons/suspend.png"));
+        border-radius: 0px;
+        margin: 10px 0px 10px 0px;
+      }
+
+      #shutdown {
+        background-image: image(url("icons/shutdown.png"));
+        border-radius: 0px;
+        margin: 10px 0px 10px 0px;
+      }
+
       #hibernate {
-      	margin: 10px;
-      	border-radius: 20px;
-      	background-image: image(url("icons/hibernate.png"));
+        background-image: image(url("icons/hibernate.png"));
+        border-radius: 0px;
+        margin: 10px 0px 10px 0px;
+      }
+
+      #reboot {
+        background-image: image(url("icons/reboot.png"));
+        border-radius: 0px 12px 12px 0px;
+        margin: 10px 10px 10px 0px;
       }
     '';
   };

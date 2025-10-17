@@ -1,49 +1,28 @@
 {
   # Git Configuration ( For Pulling Software Repos )
-  gitUsername = "username";
-  gitEmail = "email@gmail.com";
+  gitUsername = "your-username";
+  gitEmail = "your-email@example.com";
 
   # Hyprland Settings
   # ex "monitor=HDMI-A-1, 1920x1080@60,auto,1"
   #
-  extraMonitorSettings = "
-    monitor = Virtual-1, 1920x1080@60,auto,1
-    ";
-
-  # Hyprland Plugin Settings
-  hyprexpoSettings = {
-    columns = 2;
-    gap_size = 5;
-    bg_col = "rgb(111111)";
-    workspace_method = "center current";
-    skip_empty = true;
-    enable_gesture = true;
-    gesture_fingers = 3;
-    gesture_distance = 300;
-    gesture_positive = true;
-  };
-
-  hyprscrollingSettings = {
-    column_default_width = "onehalf";
-    column_widths = "onehalf one";
-    fullscreen_on_one_column = false;
-    focus_fit_method = 1;
-  };
+  extraMonitorSettings = ''
+  monitor=,preferred,auto,1
+  '';
 
   # Waybar Settings
   clock24h = false;
 
   # Program Options
-  browser = "vivaldi"; # Set Default Browser (google-chrome-stable for google-chrome)
+  browser = "brave"; # Set Default Browser
   terminal = "kitty"; # Set Default System Terminal
   keyboardLayout = "us";
   consoleKeyMap = "us";
 
-  # For Nvidia Prime support
-  intelID = "PCI:1:0:0";
-  nvidiaID = "PCI:0:2:0";
-
-  ## Enable Features Here ##
+  # For Nvidia Prime support - update these with your GPU PCI IDs
+  # Use 'lspci | grep VGA' to find your GPU IDs
+  intelID = "PCI:0:2:0";  # Intel/AMD integrated GPU
+  nvidiaID = "PCI:1:0:0"; # NVIDIA discrete GPU
 
   # Enable NFS
   enableNFS = true;
@@ -60,27 +39,27 @@
   # Enable Flutter Development Environment
   flutterdevEnable = false;
 
+  # Android Development Packages (uncomment in packages.nix to enable)
+  #pkgs-unstable.flutter # Flutter SDK
+  #androidenv.androidPkgs.platform-tools  # This includes adb
+  #androidenv.androidPkgs.emulator        # For Android emulator
+  #androidenv.androidPkgs.ndk-bundle
+
   # Enable Stylix System Theming
   stylixEnable = true;
 
-  # Enable Syncthing File Synchronization
-  syncthingEnable = true;
+  # Enable Vicinae Launcher
+  vicinaeEnable = false;
 
-  # Enable Dank Material Shell (disables waybar automatically)
-  enableDankMaterialShell = false;
+  # Enable Syncthing File Synchronization
+  syncthingEnable = false;
 
   # Display Manager Options (choose one - add to host's default.nix)
   # services.greetd.enable = true;           # greetd with tuigreet (default)
   # services.displayManager.ly.enable = true; # ly with matrix animation
 
   # Set Stylix Image
-  #stylixImage = ../../wallpapers/AnimeGirlNightSky.jpg;
-  stylixImage = ../../wallpapers/nix-wallpaper-stripes-logo.png;
-  #stylixImage = ../../wallpapers/beautifulmountainscape.png;
-  #stylixImage = ../../wallpapers/mountainscapedark.jpg;
-  #stylixImage = ../../wallpapers/Rainnight.jpg;
-  #stylixImage = ../../wallpapers/zaney-wallpaper.jpg;
-
+  stylixImage = ../../wallpapers/marsian.jpeg;
   # Set Waybar
   # Includes alternates such as:
   # Just uncomment the one you want and comment out the others

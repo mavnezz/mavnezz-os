@@ -2,21 +2,13 @@
   host,
   config,
   pkgs,
-  pkgs-unstable,
-  inputs,
   ...
 }: let
   inherit
     (import ../../../hosts/${host}/variables.nix)
     extraMonitorSettings
     keyboardLayout
-    stylixImage
-    startupApps
-    hyprexpoSettings
-    hyprscrollingSettings
     ;
-  variables = import ../../../hosts/${host}/variables.nix;
-  enableDMS = variables.enableDankMaterialShell or false;
 in {
   home.packages = with pkgs; [
     swww
@@ -25,23 +17,12 @@ in {
     wl-clipboard
     swappy
     ydotool
-    pkgs-unstable.hyprpolkitagent
-    pkgs-unstable.hyprland-qtutils # needed for banners and ANR messages
+    hyprpolkitagent
+    hyprland-qtutils # needed for banners and ANR messages
   ];
   systemd.user.targets.hyprland-session.Unit.Wants = [
     "xdg-desktop-autostart.target"
   ];
-  systemd.user.services.ydotool = {
-    Unit = {
-      Description = "ydotool daemon";
-      PartOf = ["graphical-session.target"];
-    };
-    Service = {
-      ExecStart = "${pkgs.ydotool}/bin/ydotoold";
-      Restart = "always";
-    };
-    Install.WantedBy = ["hyprland-session.target"];
-  };
   # Place Files Inside Home Directory
   home.file = {
     "Pictures/Wallpapers" = {
@@ -53,11 +34,7 @@ in {
   };
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprscrolling
-    ];
+    package = pkgs.hyprland;
     systemd = {
       enable = true;
       enableXdgAutostart = true;
@@ -67,12 +44,6 @@ in {
       enable = true;
     };
     settings = {
-      # Plugin configuration
-      plugin = {
-        hyprexpo = hyprexpoSettings;
-        hyprscrolling = hyprscrollingSettings;
-      };
-
       exec-once = [
         "wl-paste --type text --watch cliphist store # Stores only text data"
         "wl-paste --type image --watch cliphist store # Stores only image data"
@@ -80,18 +51,12 @@ in {
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user start hyprpolkitagent"
         "killall -q swww;sleep .5 && swww init"
-      ] ++ (if enableDMS then [
-        # Launch Dank Material Shell via quickshell
-        "killall -q quickshell;sleep .5 && quickshell -c DankMaterialShell"
-      ] else [
-        # Launch waybar (default)
         "killall -q waybar;sleep .5 && waybar"
-      ]) ++ [
         "killall -q swaync;sleep .5 && swaync"
         "nm-applet --indicator"
+        "vicinae server &"
         "pypr &"
-        "sleep 1.5 && swww img ${stylixImage}"
-      ] ++ startupApps;
+      ];
 
       input = {
         kb_layout = "${keyboardLayout}";
@@ -111,12 +76,23 @@ in {
         };
       };
 
+      gestures = {
+        workspace_swipe = 1;
+        workspace_swipe_fingers = 3;
+        workspace_swipe_distance = 500;
+        workspace_swipe_invert = 1;
+        workspace_swipe_min_speed_to_force = 30;
+        workspace_swipe_cancel_ratio = 0.5;
+        workspace_swipe_create_new = 1;
+        workspace_swipe_forever = 1;
+      };
+
       general = {
         "$modifier" = "SUPER";
-        layout = "scrolling";
+        layout = "dwindle";
         gaps_in = 5;
-        gaps_out = 7;
-        border_size = 3;
+        gaps_out = 5;
+        border_size = 2;
         resize_on_border = true;
         "col.active_border" = "rgb(${config.lib.stylix.colors.base08}) rgb(${config.lib.stylix.colors.base0C}) 45deg";
         "col.inactive_border" = "rgb(${config.lib.stylix.colors.base01})";
@@ -173,7 +149,13 @@ in {
         no_hardware_cursors = 2; # change to 1 if want to disable
         enable_hyprcursor = false;
         warp_on_change_workspace = 2;
-        no_warps = false;
+        no_warps = true;
+      };
+
+      render = {
+        explicit_sync = 1; # Change to 1 to disable
+        explicit_sync_kms = 1;
+        direct_scanout = 0;
       };
 
       master = {
@@ -188,12 +170,13 @@ in {
       };
     };
 
-    extraConfig = ''
+    extraConfig = "
       monitor=,preferred,auto,auto
       monitor=Virtual-1,1920x1080@60,auto,1
       ${extraMonitorSettings}
-      # Enable blur on bar
-      ${if enableDMS then "layerrule = blur,quickshell" else "layerrule = blur,waybar"}
-    '';
+      # To enable blur on waybar uncomment the line below
+      # Thanks to SchotjeChrisman
+      #layerrule = blur,waybar
+    ";
   };
 }

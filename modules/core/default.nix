@@ -6,7 +6,6 @@
     ./fonts.nix
     ./greetd.nix
     ./ly.nix
-    ./sddm.nix
     ./hardware.nix
     ./network.nix
     ./nfs.nix
@@ -20,7 +19,6 @@
     ./stylix.nix
     ./syncthing.nix
     ./system.nix
-    ./thunar.nix
     ./user.nix
     ./virtualisation.nix
     ./xserver.nix

@@ -187,3 +187,4 @@ Black Don OS includes a custom CLI utility (`dcli`) for system management:
 - Integrates Stylix for system theming
 - Home-manager for user environment management
 - Flake-utils for development environments (Flutter)
+- Add to memory

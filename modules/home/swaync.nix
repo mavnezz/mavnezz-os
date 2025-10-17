@@ -82,7 +82,7 @@
         background: #${config.lib.stylix.colors.base00};
         padding: 10px;
         border-radius: 5px;
-        border: 2px solid #${config.lib.stylix.colors.base0D};
+        border: 2px solid #${config.lib.stylix.colors.base03};
         margin: 0;
       }
       .notification-default-action {
@@ -91,8 +91,8 @@
         border-radius: 5px;
       }
       .close-button {
-        background: #${config.lib.stylix.colors.base08};
-        color: #${config.lib.stylix.colors.base00};
+        background: #${config.lib.stylix.colors.base03};
+        color: #${config.lib.stylix.colors.base05};
         text-shadow: none;
         padding: 0;
         border-radius: 5px;
@@ -101,19 +101,19 @@
       }
       .close-button:hover {
         box-shadow: none;
-        background: #${config.lib.stylix.colors.base0D};
+        background: #${config.lib.stylix.colors.base04};
         transition: all .15s ease-in-out;
         border: none
       }
       .notification-action {
-        border: 2px solid #${config.lib.stylix.colors.base0D};
+        border: 2px solid #${config.lib.stylix.colors.base03};
         border-top: none;
         border-radius: 5px;
       }
       .notification-default-action:hover,
       .notification-action:hover {
-        color: #${config.lib.stylix.colors.base0B};
-        background: #${config.lib.stylix.colors.base0B}
+        color: #${config.lib.stylix.colors.base05};
+        background: #${config.lib.stylix.colors.base02}
       }
       .notification-default-action {
         border-radius: 5px;
@@ -138,13 +138,13 @@
         background: #${config.lib.stylix.colors.base00};
         color: #${config.lib.stylix.colors.base05};
         caret-color: #${config.lib.stylix.colors.base05};
-        border: 1px solid #${config.lib.stylix.colors.base09};
+        border: 1px solid #${config.lib.stylix.colors.base03};
         border-radius: 5px
       }
       .inline-reply-button {
         margin-left: 4px;
         background: #${config.lib.stylix.colors.base00};
-        border: 1px solid #${config.lib.stylix.colors.base09};
+        border: 1px solid #${config.lib.stylix.colors.base03};
         border-radius: 5px;
         color: #${config.lib.stylix.colors.base05}
       }
@@ -165,7 +165,7 @@
         font-size: 16px;
         font-weight: 700;
         background: transparent;
-        color: rgba(158, 206, 106, 1);
+        color: #${config.lib.stylix.colors.base05};
         text-shadow: none
       }
       .time {
@@ -185,7 +185,7 @@
       }
       .control-center {
         background: #${config.lib.stylix.colors.base00};
-        border: 2px solid #${config.lib.stylix.colors.base0C};
+        border: 2px solid #${config.lib.stylix.colors.base03};
         border-radius: 5px;
       }
       .control-center-list {
@@ -201,7 +201,7 @@
         background: alpha(black, 0)
       }
       .widget-title {
-        color: #${config.lib.stylix.colors.base0B};
+        color: #${config.lib.stylix.colors.base05};
         background: #${config.lib.stylix.colors.base00};
         padding: 5px 10px;
         margin: 10px 10px 5px 10px;
@@ -217,8 +217,8 @@
         border-radius: 5px;
       }
       .widget-title>button:hover {
-        background: #${config.lib.stylix.colors.base08};
-        color: #${config.lib.stylix.colors.base00};
+        background: #${config.lib.stylix.colors.base03};
+        color: #${config.lib.stylix.colors.base05};
       }
       .widget-dnd {
         background: #${config.lib.stylix.colors.base00};
@@ -226,16 +226,16 @@
         margin: 10px 10px 5px 10px;
         border-radius: 5px;
         font-size: large;
-        color: #${config.lib.stylix.colors.base0B};
+        color: #${config.lib.stylix.colors.base05};
       }
       .widget-dnd>switch {
         border-radius: 5px;
-        /* border: 1px solid #${config.lib.stylix.colors.base0B}; */
-        background: #${config.lib.stylix.colors.base0B};
+        /* border: 1px solid #${config.lib.stylix.colors.base03}; */
+        background: #${config.lib.stylix.colors.base03};
       }
       .widget-dnd>switch:checked {
-        background: #${config.lib.stylix.colors.base08};
-        border: 1px solid #${config.lib.stylix.colors.base08};
+        background: #${config.lib.stylix.colors.base04};
+        border: 1px solid #${config.lib.stylix.colors.base04};
       }
       .widget-dnd>switch slider {
         background: #${config.lib.stylix.colors.base00};
@@ -289,7 +289,7 @@
         color: #${config.lib.stylix.colors.base05};
       }
       .widget-volume>box>button {
-        background: #${config.lib.stylix.colors.base0B};
+        background: #${config.lib.stylix.colors.base03};
         border: none
       }
       .per-app-volume {

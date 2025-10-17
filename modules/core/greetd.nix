@@ -1,7 +1,7 @@
 { config, lib, pkgs, username, ... }:
 {
   services.greetd = {
-    enable = lib.mkDefault (!config.services.displayManager.sddm.enable && !config.services.displayManager.ly.enable);
+    enable = lib.mkDefault true;
     vt = 3;
     settings = {
       default_session = {

@@ -11,13 +11,15 @@ in {
       ];
       substituters = [
         "https://hyprland.cachix.org"
+        "https://vicinae.cachix.org"
       ];
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
       ];
     };
   };
-  time.timeZone = "America/New_York";
+  time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -36,6 +38,9 @@ in {
   };
   console.keyMap = "${consoleKeyMap}";
   system.stateVersion = "23.11"; # Do not change!
+
+  # Disable NixOS documentation
+  documentation.nixos.enable = false;
 
   # Enable nix-ld for running unpackaged programs like adb
   programs.nix-ld.enable = true;

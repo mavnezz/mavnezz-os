@@ -18,7 +18,6 @@
       nerd-fonts.hack
       #symbola   #still 404 error
       terminus_font
-      inter  # Inter Variable font for DankMaterialShell
     ];
   };
 }

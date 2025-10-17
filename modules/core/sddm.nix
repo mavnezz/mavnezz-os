@@ -14,7 +14,6 @@
       then {
         FormPosition = "left";
         Blur = "2.0";
-        TimeFormat = "hh:mm AP";
       }
       else if lib.hasSuffix "studio.png" config.stylix.image
       then {
@@ -25,7 +24,6 @@
         HeaderTextColor = "#${textColor}";
         DateTextColor = "#${textColor}";
         TimeTextColor = "#${textColor}";
-        TimeFormat = "hh:mm AP";
         LoginFieldTextColor = "#${textColor}";
         PasswordFieldTextColor = "#${textColor}";
         UserIconColor = "#${textColor}";
@@ -45,7 +43,6 @@
         HeaderTextColor = "#${textColor}";
         DateTextColor = "#${textColor}";
         TimeTextColor = "#${textColor}";
-        TimeFormat = "hh:mm AP";
         LoginFieldTextColor = "#${textColor}";
         PasswordFieldTextColor = "#${textColor}";
         UserIconColor = "#${textColor}";

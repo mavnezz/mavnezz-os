@@ -44,7 +44,7 @@ extraMonitorSettings = "monitor=DP-1,1920x1080@144";
 
 ## Change Hyprland keybindings
 
-Edit `modules/home/hyprland/binds.nix`. For example, change terminal from Super+Return to Super+T:
+Edit `modules/home/hyprland/binds.nix`. For example, change terminal from Super+T to Super+Return:
 
 ```nix
 "SUPER, T, exec, ${terminal}"
@@ -52,16 +52,15 @@ Edit `modules/home/hyprland/binds.nix`. For example, change terminal from Super+
 
 ## Apply and test your changes
 
-Preferred (ZaneyOS-specific):
-- `zcli rebuild`
+Preferred (BDOS-specific):
+- `dcli rebuild`
   - Note: The `fr` alias is deprecated.
 
 Manual backup method (works anywhere):
-- From the repo root, replace PROFILE with your profile (intel, nvidia, nvidia-laptop, vm):
+- From the repo root, replace PROFILE with your host:
   - `sudo nixos-rebuild switch --flake .#PROFILE`
 
 Tips
 - If a rebuild fails, read the error near the bottom of the output—it usually points to the exact file/line.
 - If a change breaks your session after a reboot, pick an older “generation” from the boot menu to roll back.
 - Use Git to track your edits so you can revert easily.
-

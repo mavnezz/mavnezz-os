@@ -234,7 +234,8 @@ fi
 
 print_header "Cloning Black-Don-OS Repository"
 echo -e "Cloning from: ${BLUE}https://gitlab.com/theblackdon/black-don-os.git${NC}"
-git clone https://gitlab.com/theblackdon/black-don-os.git --depth=1 -b main ~/black-don-os
+echo -e "Using beta branch: ${GREEN}bdos-beta-0.1${NC}"
+git clone https://gitlab.com/theblackdon/black-don-os.git --depth=1 -b bdos-beta-0.1 ~/black-don-os
 if [ $? -ne 0 ]; then
   print_error "Failed to clone Black-Don-OS repository"
   exit 1
@@ -322,26 +323,11 @@ fi
 
 mkdir -p hosts/"$hostName"
 
-# Check if we have a suitable source to copy from
-if [[ -d "hosts/nixos-leno" ]]; then
-  sourceHost="nixos-leno"
-elif [[ -d "hosts/nix-desktop" ]]; then
-  sourceHost="nix-desktop"
-else
-  # Find any host that's not default
-  sourceHost=""
-  for host_dir in hosts/*/; do
-    host_name=$(basename "$host_dir")
-    if [[ "$host_name" != "default" ]]; then
-      sourceHost="$host_name"
-      break
-    fi
-  done
-
-  if [[ -z "$sourceHost" ]]; then
-    print_error "No suitable source host configuration found"
-    exit 1
-  fi
+# Use the default host as template
+sourceHost="default"
+if [[ ! -d "hosts/default" ]]; then
+  print_error "Default host template not found. Please ensure you're using the correct Black-Don-OS version."
+  exit 1
 fi
 
 echo -e "${GREEN}Using $sourceHost as template${NC}"
@@ -381,9 +367,14 @@ cat > hosts/"$hostName"/variables.nix << EOF
   nvidiaID = "PCI:1:0:0";  # Update this with your actual NVIDIA GPU ID
 
   # Enable/Disable Features
-  enableNFS = true;
+  enableNFS = false;
   printEnable = false;
   thunarEnable = true;
+  controllerSupportEnable = false;
+  flutterdevEnable = false;
+  stylixEnable = true;
+  vicinaeEnable = false;
+  syncthingEnable = false;
 
   # Styling
   stylixImage = ../../wallpapers/Valley.jpg;
@@ -449,23 +440,32 @@ print_header "Updating Flake Configuration"
 cp flake.nix flake.nix.backup
 
 # Check if the host is already in the flake
-if grep -q "\"$hostName\"" flake.nix; then
+if grep -q "$hostName = mkHost" flake.nix; then
   echo -e "${GREEN}Host $hostName already exists in flake.nix${NC}"
 else
   # Add the new host to flake.nix
   echo -e "${GREEN}Adding $hostName to flake.nix...${NC}"
 
-  # Create a temporary file with the new host entry
-  awk -v hostname="$hostName" -v profile="$profile" -v username="$newUsername" '
-    /^      # Host-specific configurations/ {
-      print $0
-      getline
-      print $0
-      print "      " hostname " = mkHost { hostname = \"" hostname "\"; profile = \"" profile "\"; username = \"" username "\"; };"
-      next
-    }
-    { print $0 }
-  ' flake.nix.backup > flake.nix
+  # Use sed to add the new host after the comment line
+  sed -i "/# Add new hosts here during installation/a\\      $hostName = mkHost { hostname = \"$hostName\"; profile = \"$profile\"; username = \"$newUsername\"; };" flake.nix
+
+  if grep -q "$hostName = mkHost" flake.nix; then
+    echo -e "${GREEN}✓ Successfully added $hostName to flake.nix${NC}"
+  else
+    echo -e "${RED}✗ Failed to add $hostName to flake.nix${NC}"
+    echo -e "${RED}Attempting manual addition...${NC}"
+
+    # Fallback: append before the closing brace
+    sed -i '/^    };$/i\      '"$hostName"' = mkHost { hostname = "'"$hostName"'"; profile = "'"$profile"'"; username = "'"$newUsername"'"; };' flake.nix
+
+    if grep -q "$hostName = mkHost" flake.nix; then
+      echo -e "${GREEN}✓ Successfully added $hostName using fallback method${NC}"
+    else
+      echo -e "${RED}✗ Failed to add $hostName to flake.nix even with fallback${NC}"
+      echo -e "${RED}You may need to manually add this line to flake.nix:${NC}"
+      echo -e "${YELLOW}      $hostName = mkHost { hostname = \"$hostName\"; profile = \"$profile\"; username = \"$newUsername\"; };${NC}"
+    fi
+  fi
 fi
 
 # Update timezone in system.nix
@@ -486,6 +486,15 @@ echo -e "  Host: ${GREEN}$hostName${NC}"
 echo -e "  Profile: ${GREEN}$profile${NC}"
 echo -e "  Username: ${GREEN}$newUsername${NC}"
 echo -e "  Host directory: ${GREEN}./hosts/${hostName}/${NC}"
+
+# Verify the host was added to flake.nix
+if grep -q "$hostName = mkHost" flake.nix; then
+  echo -e "  Flake entry: ${GREEN}✓ Added to flake.nix${NC}"
+else
+  echo -e "  Flake entry: ${RED}✗ Missing from flake.nix${NC}"
+  print_error "Host $hostName was not properly added to flake.nix"
+  exit 1
+fi
 
 print_header "Generating Hardware Configuration"
 echo -e "${YELLOW}Note: You may see 'ERROR: cannot access /bin' - this is normal${NC}"

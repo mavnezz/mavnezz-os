@@ -1,4 +1,4 @@
-{pkgs, pkgs-unstable, lib, zen-browser, ...}: {
+{pkgs, pkgs-unstable, lib, ...}: {
   programs = {
     neovim = {
       enable = false;
@@ -7,11 +7,7 @@
     firefox.enable = false; # Firefox is not installed by default
     dconf.enable = true;
     seahorse.enable = true;
-    hyprland = {
-      enable = true; # Create desktop file and dependencies if you switch to GUI login MGR
-      package = pkgs-unstable.hyprland; # Use unstable version for plugin compatibility
-      portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland; # Use matching portal version
-    };
+    hyprland.enable = true; #create desktop file and depedencies if you switch to GUI login MGR
     hyprlock.enable = true; #resolve pam issue https://gitlab.com/Zaney/zaneyos/-/issues/164
     fuse.userAllowOther = true;
     mtr.enable = true;
@@ -24,17 +20,13 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "cursor"
     "zed"
-    "flutter"
     "jdk"
     "claude"
   ];
 
   environment.systemPackages = with pkgs; [
-    amfora # Fancy Terminal Browser For Gemini Protocol
     appimage-run # Needed For AppImage Support
-    bottom # btop like util
     brightnessctl # For Screen Brightness Control
     cmatrix # Matrix Movie Effect In Terminal
     cowsay # Great Fun Terminal Program
@@ -50,18 +42,14 @@
     glxinfo # Needed for inxi -G GPU info
     gping #graphical ping
     greetd.tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
-    htop # Simple Terminal Based System Monitor
     hyprpicker # Color Picker
-    eog # For Image Viewing
-    alacritty # Terminal Emulator (default for niri)
-    fuzzel # Application Launcher (default for niri)
     inxi # CLI System Information Tool
     killall # For Killing All Instances Of Programs
+    lazydocker # Terminal UI for Docker
     libnotify # For Notifications
     lm_sensors # Used For Getting Hardware Temps
     lolcat # Add Colors To Your Terminal Command Output
     lshw # Detailed Hardware Information
-    mpv # Incredible Video Player
     ncdu # Disk Usage Analyzer With Ncurses Interface
     nitch # small fetch util
     # Nix Language Packages
@@ -71,57 +59,26 @@
     onefetch #shows current build info and stats
     pavucontrol # For Editing Audio Levels & Devices
     pciutils # Collection Of Tools For Inspecting PCI Devices
-    picard # For Changing Music Metadata & Getting Cover Art
     pkg-config # Wrapper Script For Allowing Packages To Get Info On Others
     playerctl # Allows Changing Media Volume Through Scripts
-    rhythmbox
     ripgrep # Improved Grep
     socat # Needed For Screenshots
     sox # audio support for FFMPEG
     unrar # Tool For Handling .rar Files
     unzip # Tool For Handling .zip Files
     usbutils # Good Tools For USB Devices
-    v4l-utils # Used For Things Like OBS Virtual Camera
-    waypaper # backup wallpaper GUI
     wget # Tool For Fetching Files With Links
-    xwayland-satellite # Xwayland outside your Wayland compositor
-    ytmdl # Tool For Downloading Audio From YouTube
-    # Apps
-    nemo # File Manager
-    nemo-fileroller # Archive Manager Integration For Nemo
     nwg-displays # Manage Displays
-    nwg-drawer # drawer GUI
-    nwg-look # Look GUI
-    rofi-emoji-wayland
-    vivaldi # Browser
-    youtube-music
-    # Unstable Packages
-    #pkgs-unstable.code-cursor # AI IDE
-    pkgs-unstable.zed-editor # Another AI IDE
-    pkgs-unstable.flutter # Flutter SDK
-    pkgs-unstable.jdk # Java vivalDevelopment Kit
+    nwg-drawer # Application Drawer
+    #youtube-music
+    pkgs-unstable.orca-slicer # 3D Slicer (Bambu, Prusa, Voron, etc.)
     pkgs-unstable.claude-code # For native development
     pkgs-unstable.nwg-dock-hyprland
-    popsicle
-    zen-browser # Zen Browser
-    teams-for-linux # Video Meetings
-    zoom-us # Video Meetings
-    telegram-desktop # Messaging App
-    vesktop # Discord Alternative
-    android-studio # Android Studio
+    #teams-for-linux # Video Meetings
+    #zoom-us # Video Meetings
     chromium # Browser
     google-chrome # Browser
-    # Dev Packages
-    androidenv.androidPkgs.platform-tools  # This includes adb
-    androidenv.androidPkgs.emulator        # For Android emulator
-    androidenv.androidPkgs.ndk-bundle
-    # Firebase CLI
-    firebase-tools
-    quick-webapps
     gum
     gtk3
-    gtk4
-    localsend
-    obsidian
   ];
 }

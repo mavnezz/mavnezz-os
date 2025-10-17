@@ -1,47 +1,44 @@
 {...}: {
   home.file.".config/rofi/config-long.rasi".text = ''
     @import "~/.config/rofi/config.rasi"
-    * {
-      font: "JetBrainsMono Nerd Font 14, Noto Color Emoji 14";
-    }
     window {
-      width: 750px;
-      border-radius: 20px;
+      width: 600px;
+      border-radius: 15px;
     }
     mainbox {
       orientation: vertical;
       children: [ "inputbar", "listbox" ];
     }
     inputbar {
-      padding: 75px 40px;
-      background-color: @bg-alt;
+      padding: 20px;
+      background-color: @bg;
       text-color: @foreground;
       children: [ "textbox-prompt-colon", "entry" ];
     }
     textbox-prompt-colon {
-      padding: 12px 20px;
+      padding: 10px 16px;
       border-radius: 100%;
       background-color: @bg-alt;
       text-color: @foreground;
     }
     entry {
       expand: true;
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-radius: 100%;
       background-color: @bg-alt;
       text-color: @foreground;
     }
     button {
-      padding: 12px;
+      padding: 10px;
       border-radius: 100%;
     }
     element {
-      spacing: 10px;
-      padding: 12px;
+      spacing: 8px;
+      padding: 10px;
       border-radius: 100%;
     }
     textbox {
-      padding: 12px;
+      padding: 10px;
       border-radius: 100%;
     }
     error-message {

@@ -1,4 +1,4 @@
-# A Guide to Customizing Hyprland in ZaneyOS
+# A Guide to Customizing Hyprland in BDOS
 
 This guide provides a practical overview for customizing your Hyprland experience in ZaneyOS. We’ll cover the most relevant files, what they do, and small, safe edits you can make.
 
@@ -6,8 +6,8 @@ Note: These files are written in Nix. A small syntax error can break builds. Mak
 
 ## Applying your changes
 
-Preferred (ZaneyOS-specific):
-- `zcli rebuild`
+Preferred (BDOS - specific):
+- `dcli rebuild`
   - Note: The `fr` alias is deprecated.
 
 Manual backup method (works anywhere):
@@ -161,4 +161,3 @@ Example: Float Thunar always
 - Make one change at a time and rebuild to validate.
 - Keep a terminal open during experiments in case your launcher keybind changes.
 - If something breaks, reboot and choose a previous generation in the boot menu.
-
