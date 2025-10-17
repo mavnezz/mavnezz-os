@@ -1,9 +1,11 @@
-{...}: {
+{lib, ...}: {
   imports = [
     ./hardware.nix
     ./host-packages.nix
   ];
 
-  # Enable ly display manager by default
-  services.displayManager.ly.enable = true;
+  # Enable SDDM display manager
+  services.greetd.enable = lib.mkForce false;
+  services.displayManager.ly.enable = false;
+  services.displayManager.sddm.enable = true;
 }
