@@ -1,6 +1,8 @@
 # ❄️mavnezz-os Powered by NixOS❄️
 
-A customized NixOS configuration based on ZaneyOS by Tyler Kelley, tailored for multiple host setups with NVIDIA GPU support.
+![Projektlogo](img/desktop.png)
+
+A customized NixOS configuration based on ZaneyOS by Tyler Kelley, and theblackdon tailored for multiple host setups with NVIDIA GPU support.
 
 ## Overview
 mavnezz-os is a personalized NixOS configuration that supports multiple host computers with different hardware profiles. It features a modern minimal desktop environment with Hyprland, extensive customization options, and easy multi-host management.
