@@ -8,6 +8,7 @@
     (import ../../../hosts/${host}/variables.nix)
     extraMonitorSettings
     keyboardLayout
+    stylixImage
     ;
 in {
   home.packages = with pkgs; [
@@ -23,6 +24,12 @@ in {
   systemd.user.targets.hyprland-session.Unit.Wants = [
     "xdg-desktop-autostart.target"
   ];
+
+  # Set wallpaper on every rebuild
+  home.activation.setWallpaper = config.lib.dag.entryAfter ["writeBoundary"] ''
+    $DRY_RUN_CMD ${pkgs.swww}/bin/swww img ${toString stylixImage} 2>/dev/null || true
+  '';
+
   # Place Files Inside Home Directory
   home.file = {
     "Pictures/Wallpapers" = {
@@ -50,7 +57,7 @@ in {
         "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user start hyprpolkitagent"
-        "killall -q swww;sleep .5 && swww init"
+        "killall -q swww;sleep .5 && swww init && sleep 1 && swww img ${toString stylixImage}"
         "killall -q waybar;sleep .5 && waybar"
         "killall -q swaync;sleep .5 && swaync"
         "nm-applet --indicator"

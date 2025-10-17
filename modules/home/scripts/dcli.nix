@@ -12,7 +12,7 @@ in
     set -euo pipefail
 
     # --- Configuration ---
-    PROJECT="black-don-os"
+    PROJECT="mavnezz-os"
     HOST="${host}"
     PROFILE="${profile}"
     BACKUP_FILES_STR="${backupFilesString}"
