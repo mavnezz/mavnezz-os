@@ -1,9 +1,9 @@
-# ❄️BlackDonOS Powered by NixOS❄️
+# ❄️mavnezz-os Powered by NixOS❄️
 
 A customized NixOS configuration based on ZaneyOS by Tyler Kelley, tailored for multiple host setups with NVIDIA GPU support.
 
 ## Overview
-Black Don OS is a personalized NixOS configuration that supports multiple host computers with different hardware profiles. It features a modern minimal desktop environment with Hyprland, extensive customization options, and easy multi-host management.
+mavnezz-os is a personalized NixOS configuration that supports multiple host computers with different hardware profiles. It features a modern minimal desktop environment with Hyprland, extensive customization options, and easy multi-host management.
 
 The configuration is built with modularity in mind - each host can have different features enabled or disabled (like NFS, printing, gaming controller support, Flutter development environment, etc.), custom keybinds and window rules, and personalized theming. It includes the Vicinae launcher by default for a smooth application launching experience.
 
@@ -23,7 +23,7 @@ The configuration is built with modularity in mind - each host can have differen
 ## Installation
 
 ### For New Users
-If you want to install Black Don OS on a fresh NixOS system:
+If you want to install mavnezz-os on a fresh NixOS system:
 
 1. Boot from NixOS ISO and ensure you have network access
 
@@ -34,14 +34,14 @@ If you want to install Black Don OS on a fresh NixOS system:
 
 3. Run the installation script:
    ```bash
-   sh <(curl -sL https://gitlab.com/theblackdon/black-don-os/-/raw/bdos-beta-0.1/install-black-don-os.sh)
+   sh <(curl -sL https://raw.githubusercontent.com/mavnezz/mavnezz-os/main/install-mavnezz-os.sh)
    ```
 
 The installer will:
 - Detect your hardware (GPU, etc.)
 - Guide you through hostname and user configuration
 - Clone the repository and set up your configuration
-- Build and install Black Don OS
+- Build and install mavnezz-os
 - Create a personalized setup for your computer
 
 **After Installation:** You may need to customize monitor settings and GPU IDs in your `hosts/YOUR-HOST/variables.nix` file:
@@ -50,8 +50,8 @@ The installer will:
 - **NVIDIA Prime:** Update `intelID` and `nvidiaID` with your actual GPU PCI IDs (find with `lspci | grep VGA`)
 - **Wallpapers:** Choose your preferred wallpaper from the `wallpapers/` directory
 
-### For Existing Black Don OS Users
-If you already have Black Don OS and want to add a new computer:
+### For Existing mavnezz-os Users
+If you already have mavnezz-os and want to add a new computer:
 
 ```shell
 ./setup-new-host.sh
@@ -83,7 +83,7 @@ nixos-rebuild build --flake .#nix-desktop
 ## Directory Structure
 
 ```
-black-don-os/
+mavnezz-os/
 ├── hosts/                    # Host-specific configurations
 │   ├── nixos-leno/          # Laptop configuration
 │   ├── nix-desktop/         # Desktop configuration
@@ -189,7 +189,7 @@ Each host has its own directory under `hosts/` containing:
 - **Colors:** Stylix handles theming from wallpaper
 
 ## dcli - Don CLI Utility
-Black Don OS includes `dcli`, a custom command-line utility for managing your multi-host setup:
+mavnezz-os includes `dcli`, a custom command-line utility for managing your multi-host setup:
 
 ### Common Commands
 ```bash
@@ -216,7 +216,8 @@ See `dcli.md` for complete documentation.
 ### Repository Management
 This is a fork of ZaneyOS with personal customizations:
 
-- **Origin:** Your fork at https://gitlab.com/theblackdon/black-don-os.git
+- **Origin:** Your fork at git@github.com:mavnezz/mavnezz-os.git
+- **Upstream:** theblackdon fork at https://gitlab.com/theblackdon/black-don-os.git
 - **Upstream:** Original ZaneyOS at https://gitlab.com/zaney/zaneyos.git
 
 ### Updating from Upstream
@@ -273,9 +274,9 @@ hyprctl keyword monitor "HDMI-A-1,1920x1080@60,0x0,1"
 Based on ZaneyOS, following the same license terms. See LICENSE file for details.
 
 ## Support
-For issues specific to Black Don OS customizations:
+For issues specific to mavnezz-os customizations:
 - Check host-specific installation guides
 - Review the troubleshooting section
 - Refer to the original ZaneyOS documentation for base functionality
 
-**Happy computing with Black Don OS! 🚀**
+**Happy computing with mavnezz-os! 🚀**
