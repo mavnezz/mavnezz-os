@@ -249,15 +249,15 @@ echo "👤 Setting up git configuration for version control:"
 echo "  This is needed for system updates and configuration management."
 echo ""
 echo -e "Current username: ${GREEN}$newUsername${NC}"
-read -rp "Enter your full name for git commits [ mavnezz-os User ]: " gitUsername
+read -rp "Enter your full name for git commits [ mavnezz ]: " gitUsername
 if [ -z "$gitUsername" ]; then
-  gitUsername="mavnezz-os User"
+  gitUsername="mavnezz"
 fi
 
 echo "📧 Examples: john@example.com, jane.doe@company.org"
-read -rp "Enter your email address for git commits [ $newUsername@example.com ]: " gitEmail
+read -rp "Enter your email address for git commits [ $newUsername@github.com ]: " gitEmail
 if [ -z "$gitEmail" ]; then
-  gitEmail="$newUsername@example.com"
+  gitEmail="$newUsername@github.com"
 fi
 
 echo -e "${GREEN}✓ Git name: $gitUsername${NC}"
