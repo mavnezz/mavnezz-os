@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 ######################################
-# Install script for Black-Don-OS
-# Author: Black Don (Based on ZaneyOS by Tyler Kelley)
+# Install script for mavnezz-os
+# Author: mavnezz (Based on BlackDonOS & ZaneyOS by Black Don & Tyler Kelley)
 # Date: January 2025
 #######################################
 
@@ -40,7 +40,7 @@ print_warning() {
 # Function to print a success banner
 print_success_banner() {
   echo -e "${GREEN}╔═══════════════════════════════════════════════════════════════════════╗${NC}"
-  echo -e "${GREEN}║                Black-Don-OS Installation Successful!                  ║${NC}"
+  echo -e "${GREEN}║                mavnezz-os Installation Successful!                  ║${NC}"
   echo -e "${GREEN}║                                                                       ║${NC}"
   echo -e "${GREEN}║   Please reboot your system for changes to take full effect.          ║${NC}"
   echo -e "${GREEN}║                                                                       ║${NC}"
@@ -50,7 +50,7 @@ print_success_banner() {
 # Function to print a failure banner
 print_failure_banner() {
   echo -e "${RED}╔═══════════════════════════════════════════════════════════════════════╗${NC}"
-  echo -e "${RED}║                Black-Don-OS Installation Failed!                      ║${NC}"
+  echo -e "${RED}║                mavnezz-os Installation Failed!                      ║${NC}"
   echo -e "${RED}║                                                                       ║${NC}"
   echo -e "${RED}║   Please review the log file for details:                             ║${NC}"
   echo -e "${RED}║   ${LOG_FILE}                                                        ║${NC}"
@@ -58,8 +58,8 @@ print_failure_banner() {
   echo -e "${RED}╚═══════════════════════════════════════════════════════════════════════╝${NC}"
 }
 
-print_header "Black-Don-OS Installation Script"
-echo -e "${BLUE}Welcome to Black-Don-OS - A customized NixOS distribution${NC}"
+print_header "mavnezz-os Installation Script"
+echo -e "${BLUE}Welcome to mavnezz-os - A customized NixOS distribution${NC}"
 echo -e "Based on ZaneyOS with Don's personal customizations"
 echo ""
 
@@ -212,46 +212,46 @@ if [ -z "$newUsername" ]; then
 fi
 echo -e "${GREEN}✓ Username set to: $newUsername${NC}"
 
-print_header "Backup Existing Black-Don-OS (if any)"
+print_header "Backup Existing mavnezz-os (if any)"
 
 backupname=$(date +"%Y-%m-%d-%H-%M-%S")
-if [ -d "black-don-os" ]; then
-  echo -e "${GREEN}black-don-os exists, backing up to .config/black-don-os-backups folder.${NC}"
-  if [ -d ".config/black-don-os-backups" ]; then
-    echo -e "${GREEN}Moving current version of Black-Don-OS to backups folder.${NC}"
-    mv "$HOME"/black-don-os .config/black-don-os-backups/"$backupname"
+if [ -d "mavnezz-os" ]; then
+  echo -e "${GREEN}mavnezz-os exists, backing up to .config/mavnezz-os-backups folder.${NC}"
+  if [ -d ".config/mavnezz-os-backups" ]; then
+    echo -e "${GREEN}Moving current version of mavnezz-os to backups folder.${NC}"
+    mv "$HOME"/mavnezz-os .config/mavnezz-os-backups/"$backupname"
     sleep 1
   else
-    echo -e "${GREEN}Creating the backups folder & moving Black-Don-OS to it.${NC}"
-    mkdir -p .config/black-don-os-backups
-    mv "$HOME"/black-don-os .config/black-don-os-backups/"$backupname"
+    echo -e "${GREEN}Creating the backups folder & moving mavnezz-os to it.${NC}"
+    mkdir -p .config/mavnezz-os-backups
+    mv "$HOME"/mavnezz-os .config/mavnezz-os-backups/"$backupname"
     sleep 1
   fi
 else
-  echo -e "${GREEN}Thank you for choosing Black-Don-OS.${NC}"
+  echo -e "${GREEN}Thank you for choosing mavnezz-os.${NC}"
   echo -e "${GREEN}I hope you find your time here enjoyable!${NC}"
 fi
 
-print_header "Cloning Black-Don-OS Repository"
-echo -e "Cloning from: ${BLUE}https://gitlab.com/theblackdon/black-don-os.git${NC}"
+print_header "Cloning mavnezz-os Repository"
+echo -e "Cloning from: ${BLUE}https://github.com/mavnezz/mavnezz-os.git${NC}"
 echo -e "Using beta branch: ${GREEN}bdos-beta-0.1${NC}"
-git clone https://gitlab.com/theblackdon/black-don-os.git --depth=1 -b bdos-beta-0.1 ~/black-don-os
+git clone https://github.com/mavnezz/mavnezz-os.git --depth=1 -b main ~/mavnezz-os
 if [ $? -ne 0 ]; then
-  print_error "Failed to clone Black-Don-OS repository"
+  print_error "Failed to clone mavnezz-os repository"
   exit 1
 fi
 
-cd ~/black-don-os || exit 1
-echo -e "${GREEN}✓ Successfully cloned Black-Don-OS${NC}"
+cd ~/mavnezz-os || exit 1
+echo -e "${GREEN}✓ Successfully cloned mavnezz-os${NC}"
 
 print_header "Git Configuration"
 echo "👤 Setting up git configuration for version control:"
 echo "  This is needed for system updates and configuration management."
 echo ""
 echo -e "Current username: ${GREEN}$newUsername${NC}"
-read -rp "Enter your full name for git commits [ Black Don User ]: " gitUsername
+read -rp "Enter your full name for git commits [ mavnezz-os User ]: " gitUsername
 if [ -z "$gitUsername" ]; then
-  gitUsername="Black Don User"
+  gitUsername="mavnezz-os User"
 fi
 
 echo "📧 Examples: john@example.com, jane.doe@company.org"
@@ -272,7 +272,7 @@ echo "  • Australia: Australia/Sydney, Australia/Melbourne"
 echo "  • UTC (Universal): UTC"
 read -rp "Enter your timezone [ America/New_York ]: " timezone
 if [ -z "$timezone" ]; then
-  timezone="America/New_York"
+  timezone="Europe/Berlin"
 fi
 echo -e "${GREEN}✓ Timezone set to: $timezone${NC}"
 
@@ -287,9 +287,9 @@ echo "  • es (Spanish)"
 echo "  • it (Italian)"
 echo "  • ru (Russian)"
 echo "  • dvorak (Dvorak)"
-read -rp "Enter your keyboard layout: [ us ] " keyboardLayout
+read -rp "Enter your keyboard layout: [ de ] " keyboardLayout
 if [ -z "$keyboardLayout" ]; then
-  keyboardLayout="us"
+  keyboardLayout="de"
 fi
 echo -e "${GREEN}✓ Keyboard layout set to: $keyboardLayout${NC}"
 
@@ -299,7 +299,7 @@ echo "  Most common: us, uk, de, fr, es, it, ru"
 # Smart default: use keyboard layout as console keymap default if it's a common one
 defaultConsoleKeyMap="$keyboardLayout"
 if [[ ! "$keyboardLayout" =~ ^(us|uk|de|fr|es|it|ru|us-intl|dvorak)$ ]]; then
-  defaultConsoleKeyMap="us"
+  defaultConsoleKeyMap="de"
 fi
 read -rp "Enter your console keymap: [ $defaultConsoleKeyMap ] " consoleKeyMap
 if [ -z "$consoleKeyMap" ]; then
@@ -326,7 +326,7 @@ mkdir -p hosts/"$hostName"
 # Use the default host as template
 sourceHost="default"
 if [[ ! -d "hosts/default" ]]; then
-  print_error "Default host template not found. Please ensure you're using the correct Black-Don-OS version."
+  print_error "Default host template not found. Please ensure you're using the correct mavnezz-os version."
   exit 1
 fi
 
@@ -511,7 +511,7 @@ echo -e "  👤  Username: ${GREEN}$newUsername${NC}"
 echo -e "  🌍  Timezone: ${GREEN}$timezone${NC}"
 echo -e "  ⌨️   Keyboard: ${GREEN}$keyboardLayout${NC}"
 echo ""
-echo -e "${YELLOW}This will build and apply your Black-Don-OS configuration.${NC}"
+echo -e "${YELLOW}This will build and apply your mavnezz-os configuration.${NC}"
 echo -e "${YELLOW}The build process may take 10-30 minutes depending on your hardware.${NC}"
 echo ""
 
@@ -521,12 +521,12 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     echo -e "${RED}Build cancelled by user.${NC}"
     print_header "Manual Build Instructions"
     echo -e "You can manually build later with:"
-    echo -e "${GREEN}cd ~/black-don-os${NC}"
+    echo -e "${GREEN}cd ~/mavnezz-os${NC}"
     echo -e "${GREEN}sudo nixos-rebuild boot --flake .#$hostName${NC}"
     exit 1
 fi
 
-print_header "Building Black-Don-OS"
+print_header "Building mavnezz-os"
 echo -e "${BLUE}Building configuration for $hostName...${NC}"
 echo -e "${YELLOW}This may take a while - please be patient${NC}"
 
@@ -541,12 +541,12 @@ if sudo nixos-rebuild boot --flake .#$hostName; then
   echo -e "${GREEN}🎉 Installation completed successfully!${NC}"
   echo ""
   echo -e "${BLUE}What's next:${NC}"
-  echo -e "1. ${GREEN}Reboot your system${NC} to load Black-Don-OS"
-  echo -e "2. Your configuration is in: ${GREEN}~/black-don-os${NC}"
-  echo -e "3. To update later: ${GREEN}cd ~/black-don-os && sudo nixos-rebuild switch --flake .#$hostName${NC}"
-  echo -e "4. Read the documentation: ${GREEN}~/black-don-os/README-BLACK-DON-OS.md${NC}"
+  echo -e "1. ${GREEN}Reboot your system${NC} to load mavnezz-os"
+  echo -e "2. Your configuration is in: ${GREEN}~/mavnezz-os${NC}"
+  echo -e "3. To update later: ${GREEN}cd ~/mavnezz-os && sudo nixos-rebuild switch --flake .#$hostName${NC}"
+  echo -e "4. Read the documentation: ${GREEN}~/mavnezz-os/README-mavnezz-os.md${NC}"
   echo ""
-  echo -e "${YELLOW}Enjoy your Black-Don-OS experience!${NC}"
+  echo -e "${YELLOW}Enjoy your mavnezz-os experience!${NC}"
 
 else
   # Clean up git config even on failure
@@ -561,7 +561,7 @@ else
   echo -e "3. Check the log file: $LOG_FILE"
   echo ""
   echo -e "${YELLOW}Manual retry:${NC}"
-  echo -e "cd ~/black-don-os"
+  echo -e "cd ~/mavnezz-os"
   echo -e "sudo nixos-rebuild boot --flake .#$hostName"
   exit 1
 fi
