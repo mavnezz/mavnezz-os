@@ -176,10 +176,10 @@ cat > "hosts/$newHostName/variables.nix" << EOF
   clock24h = false;
 
   # Program Options
-  browser = "vivaldi"; # Set Default Browser (google-chrome-stable for google-chrome)
+  browser = "google-chrome-stable"; # Set Default Browser (google-chrome-stable for google-chrome)
   terminal = "kitty"; # Set Default System Terminal
-  keyboardLayout = "us";
-  consoleKeyMap = "us";
+  keyboardLayout = "de";
+  consoleKeyMap = "de";
 
   # For Nvidia Prime support (update these IDs after hardware detection)
   # Run 'lspci | grep VGA' to find your actual GPU IDs
@@ -192,10 +192,10 @@ cat > "hosts/$newHostName/variables.nix" << EOF
   thunarEnable = true;
 
   # Styling
-  stylixImage = ../../wallpapers/Valley.jpg;
+  stylixImage = ../../wallpapers/marsian.jpeg;
 
   # Waybar Choice
-  waybarChoice = ../../modules/home/waybar/waybar-ddubs.nix;
+  waybarChoice = ../../modules/home/waybar/mavnezz.nix;
 
   # Animation Choice
   animChoice = ../../modules/home/hyprland/animations-end4.nix;
