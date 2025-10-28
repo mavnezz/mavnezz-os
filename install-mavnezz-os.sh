@@ -234,7 +234,7 @@ fi
 
 print_header "Cloning mavnezz-os Repository"
 echo -e "Cloning from: ${BLUE}https://github.com/mavnezz/mavnezz-os.git${NC}"
-echo -e "Using beta branch: ${GREEN}bdos-beta-0.1${NC}"
+echo -e "Using main branch: ${GREEN}main${NC}"
 git clone https://github.com/mavnezz/mavnezz-os.git --depth=1 -b main ~/mavnezz-os
 if [ $? -ne 0 ]; then
   print_error "Failed to clone mavnezz-os repository"
@@ -270,7 +270,7 @@ echo "  • Europe: Europe/London, Europe/Berlin, Europe/Paris, Europe/Rome"
 echo "  • Asia: Asia/Tokyo, Asia/Shanghai, Asia/Seoul, Asia/Kolkata"
 echo "  • Australia: Australia/Sydney, Australia/Melbourne"
 echo "  • UTC (Universal): UTC"
-read -rp "Enter your timezone [ America/New_York ]: " timezone
+read -rp "Enter your timezone [ Europe/Berlin ]: " timezone
 if [ -z "$timezone" ]; then
   timezone="Europe/Berlin"
 fi
@@ -356,7 +356,7 @@ cat > hosts/"$hostName"/variables.nix << EOF
   clock24h = false;
 
   # Program Options
-  browser = "vivaldi"; # Set Default Browser (google-chrome-stable for google-chrome)
+  browser = "google-chrome-stable"; # Set Default Browser (google-chrome-stable for google-chrome)
   terminal = "kitty"; # Set Default System Terminal
   keyboardLayout = "$keyboardLayout";
   consoleKeyMap = "$consoleKeyMap";
@@ -377,10 +377,10 @@ cat > hosts/"$hostName"/variables.nix << EOF
   syncthingEnable = false;
 
   # Styling
-  stylixImage = ../../wallpapers/Valley.jpg;
+  stylixImage = ../../wallpapers/marsian.jpeg;
 
   # Waybar Choice
-  waybarChoice = ../../modules/home/waybar/waybar-ddubs.nix;
+  waybarChoice = ../../modules/home/waybar/mavnezz.nix;
 
   # Animation Choice
   animChoice = ../../modules/home/hyprland/animations-end4.nix;
