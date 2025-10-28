@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   hardware = {
     sane = {
@@ -14,6 +14,11 @@
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
   };
+
+  # Default swap configuration
+  swapDevices = lib.mkDefault [
+    { device = "/swapfile"; size = 8192; }
+  ];
 
 
 

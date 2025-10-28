@@ -41,7 +41,6 @@
     gimp # Great Photo Editor
     glxinfo # Needed for inxi -G GPU info
     gping #graphical ping
-    greetd.tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
     hyprpicker # Color Picker
     inxi # CLI System Information Tool
     killall # For Killing All Instances Of Programs
