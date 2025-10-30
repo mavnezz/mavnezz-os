@@ -69,6 +69,9 @@
     wget # Tool For Fetching Files With Links
     nwg-displays # Manage Displays
     nwg-drawer # Application Drawer
+    # PHP & Laravel Development
+    php83 # PHP 8.3 for Laravel
+    php83Packages.composer # PHP Dependency Manager
     #youtube-music
     pkgs-unstable.orca-slicer # 3D Slicer (Bambu, Prusa, Voron, etc.)
     pkgs-unstable.claude-code # For native development

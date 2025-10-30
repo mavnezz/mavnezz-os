@@ -17,6 +17,7 @@ in {
     ./hyprland
     ./kitty.nix
     ./lazygit.nix
+    ./libreoffice.nix
     ./rofi
     ./scripts
     ./starship.nix
