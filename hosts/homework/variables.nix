@@ -15,8 +15,9 @@
   clock24h = false;
 
   # Program Options
-  browser = "vivaldi"; # Set Default Browser (google-chrome-stable for google-chrome)
+  browser = "google-chrome-stable"; # Set Default Browser (google-chrome-stable for google-chrome)
   terminal = "kitty"; # Set Default System Terminal
+  remoteDesktop = "remmina"; # Remote Desktop Client
   keyboardLayout = "de";
   consoleKeyMap = "de";
 

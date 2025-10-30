@@ -14,10 +14,11 @@
   clock24h = false;
 
   # Program Options
-  browser = "brave"; # Set Default Browser
+  browser = "google-chrome-stable"; # Set Default Browser
   terminal = "kitty"; # Set Default System Terminal
-  keyboardLayout = "us";
-  consoleKeyMap = "us";
+  remoteDesktop = "remmina"; # Remote Desktop Client
+  keyboardLayout = "de";
+  consoleKeyMap = "de";
 
   # For Nvidia Prime support - update these with your GPU PCI IDs
   # Use 'lspci | grep VGA' to find your GPU IDs

@@ -82,5 +82,7 @@
     google-chrome # Browser
     gum
     gtk3
+    remmina # Remote Desktop Client
+    slack # Team Communication
   ];
 }
