@@ -60,6 +60,7 @@
     pciutils # Collection Of Tools For Inspecting PCI Devices
     pkg-config # Wrapper Script For Allowing Packages To Get Info On Others
     playerctl # Allows Changing Media Volume Through Scripts
+    rclone # Cloud Storage Sync Tool
     ripgrep # Improved Grep
     socat # Needed For Screenshots
     sox # audio support for FFMPEG
@@ -72,12 +73,13 @@
     # PHP & Laravel Development
     php83 # PHP 8.3 for Laravel
     php83Packages.composer # PHP Dependency Manager
+    nodejs
     #youtube-music
     pkgs-unstable.orca-slicer # 3D Slicer (Bambu, Prusa, Voron, etc.)
     pkgs-unstable.claude-code # For native development
     pkgs-unstable.nwg-dock-hyprland
-    #teams-for-linux # Video Meetings
-    #zoom-us # Video Meetings
+    teams-for-linux # Video Meetings
+    zoom-us # Video Meetings
     chromium # Browser
     google-chrome # Browser
     gum
