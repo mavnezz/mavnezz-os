@@ -36,6 +36,7 @@
     eza # Beautiful ls Replacement
     ffmpeg # Terminal Video / Audio Editing
     file-roller # Archive Manager
+    nautilus # GNOME File Manager
     gdu # graphical disk usage
     gedit # Simple Graphical Text Editor
     gimp # Great Photo Editor
