@@ -87,5 +87,7 @@
     gtk3
     remmina # Remote Desktop Client
     slack # Team Communication
+    vlc # Media Player
+    anydesk # Remote Desktop
   ];
 }
