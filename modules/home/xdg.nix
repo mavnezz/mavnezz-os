@@ -2,6 +2,18 @@
   xdg = {
     enable = true;
     mime.enable = true;
+    desktopEntries = {
+      AnyDesk = {
+        name = "AnyDesk";
+        comment = "Remote Desktop";
+        exec = "env GDK_BACKEND=x11 anydesk %u";
+        icon = "anydesk";
+        terminal = false;
+        type = "Application";
+        categories = ["Network" "RemoteAccess"];
+        noDisplay = false;
+      };
+    };
     mimeApps = {
       enable = true;
       defaultApplications = {
