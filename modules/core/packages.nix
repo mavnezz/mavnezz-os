@@ -89,5 +89,6 @@
     slack # Team Communication
     vlc # Media Player
     anydesk # Remote Desktop
+    vivaldi # Browser
   ];
 }
