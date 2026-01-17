@@ -69,17 +69,17 @@ This will guide you through:
 
 ```bash
 # Using dcli (recommended)
-dcli build nix-desktop      # Build only (no activation)
-dcli deploy nix-desktop     # Build and switch
+dcli build homework         # Build only (no activation)
+dcli deploy homework        # Build and switch
 
 # Using standard nix commands
-nixos-rebuild build --flake .#nix-desktop
+nixos-rebuild build --flake .#homework
 ```
 
 ## Installing on New Hardware
 
 1. Boot NixOS installer ISO on target computer
-2. Follow the host-specific installation guide (e.g., `INSTALL-nix-desktop.md`)
+2. Follow the host-specific installation guide (e.g., `INSTALL-homework.md`)
 3. Clone this repository and run the installation commands
 
 ## Directory Structure
@@ -87,8 +87,8 @@ nixos-rebuild build --flake .#nix-desktop
 ```
 mavnezz-os/
 ├── hosts/                    # Host-specific configurations
-│   ├── nixos-leno/          # Laptop configuration
-│   ├── nix-desktop/         # Desktop configuration
+│   ├── homework/            # Desktop configuration
+│   ├── surface/             # Surface laptop configuration
 │   └── default/             # Template host
 ├── profiles/                 # Hardware profiles
 │   ├── nvidia/              # Desktop NVIDIA
