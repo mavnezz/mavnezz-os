@@ -35,7 +35,7 @@ dcli options
 
 Hardware Profiles and when to use them
 - amd, intel, nvidia, nvidia-laptop (hybrid), vm
-- Choose with the hostname argument in dcli/nixos-rebuild commands (e.g., dcli deploy nix-desktop)
+- Choose with the hostname argument in dcli/nixos-rebuild commands (e.g., dcli deploy homework)
 
 High-level architecture
 - flake.nix

@@ -47,8 +47,8 @@ Commands:
   help           - Show this help message
 
 Examples:
-  dcli build nix-desktop     # Build desktop configuration
-  dcli deploy nixos-leno     # Deploy laptop configuration
+  dcli build homework        # Build desktop configuration
+  dcli deploy surface        # Deploy laptop configuration
   dcli status               # Check system status
 ```
 
@@ -74,10 +74,10 @@ You can switch configurations using either dcli or standard NixOS commands:
 
 ```bash
 # Using dcli (recommended)
-dcli deploy nix-desktop
+dcli deploy homework
 
 # Using standard NixOS rebuild
-sudo nixos-rebuild switch --flake ~/black-don-os#nix-desktop
+sudo nixos-rebuild switch --flake ~/mavnezz-os#homework
 ```
 
 ### **🔄 How do I update my Black-Don-OS system?**

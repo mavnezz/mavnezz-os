@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     # Add your host-specific packages here
-    # Example packages from nixos-leno:
+    # Host-specific packages:
     # audacity
     # discord
     # nodejs

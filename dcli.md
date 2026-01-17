@@ -25,8 +25,8 @@ If no command is provided, it displays the help message.
 
 | Command        | Description                                                                               | Example Usage                    |
 | -------------- | ----------------------------------------------------------------------------------------- | -------------------------------- |
-| build [HOST]   | Build configuration for specific host (no activation)                                    | `dcli build nix-desktop`         |
-| deploy [HOST]  | Build and switch to specific host configuration                                           | `dcli deploy nix-desktop`        |
+| build [HOST]   | Build configuration for specific host (no activation)                                    | `dcli build homework`         |
+| deploy [HOST]  | Build and switch to specific host configuration                                           | `dcli deploy homework`        |
 | list-hosts     | List all available host configurations                                                    | `dcli list-hosts`                |
 
 ### Maintenance Commands
@@ -75,9 +75,9 @@ dcli comes with convenient shell aliases for common operations:
 
 ### Multi-Host Commands
 
-- **🔨 build [HOST]**: Builds a configuration for the specified host without activating it. Useful for testing configurations or preparing for deployment. Example: `dcli build nix-desktop`
+- **🔨 build [HOST]**: Builds a configuration for the specified host without activating it. Useful for testing configurations or preparing for deployment. Example: `dcli build homework`
 
-- **🚀 deploy [HOST]**: Builds and immediately switches to the specified host configuration. Use with caution as it will change your current system configuration. Example: `dcli deploy nix-desktop`
+- **🚀 deploy [HOST]**: Builds and immediately switches to the specified host configuration. Use with caution as it will change your current system configuration. Example: `dcli deploy homework`
 
 - **📋 list-hosts**: Shows all available host configurations in your setup. Marks the current host configuration for easy identification.
 
@@ -109,19 +109,19 @@ dcli comes with convenient shell aliases for common operations:
 dcli list-hosts
 
 # Build configuration for new host (test without deploying)
-dcli build nix-desktop
+dcli build homework
 
 # If build successful, deploy to the target system
-dcli deploy nix-desktop
+dcli deploy homework
 ```
 
 ### Managing Multiple Computers
 ```bash
-# On your laptop (nixos-leno)
+# On your laptop (surface)
 fr                    # Quick rebuild current host
 
 # Switch to desktop configuration (if managing remotely)
-dcli deploy nix-desktop
+dcli deploy homework
 
 # Interactive switching
 switch                # or dcli switch-host
@@ -154,13 +154,13 @@ dcli status
 dcli commit "Updated desktop configuration"
 
 # Test build
-dcli build nix-desktop
+dcli build homework
 
 # Push to repository
 dcli push
 
 # Deploy to target system
-dcli deploy nix-desktop
+dcli deploy homework
 ```
 
 ## Configuration
