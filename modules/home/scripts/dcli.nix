@@ -235,6 +235,14 @@ in
         echo "Updating flake and rebuilding system for current host: $HOST"
         cd "$HOME/$PROJECT" || { echo "Error: Could not change to $HOME/$PROJECT"; exit 1; }
 
+        # Update Snapmaker OrcaSlicer if script exists
+        if [ -x "$HOME/$PROJECT/scripts/update-snapmaker-orca.sh" ]; then
+          echo ""
+          echo "Checking for Snapmaker OrcaSlicer updates..."
+          "$HOME/$PROJECT/scripts/update-snapmaker-orca.sh" || echo "⚠ Snapmaker update check skipped"
+          echo ""
+        fi
+
         echo "Updating flake..."
         if nix flake update; then
           echo "✓ Flake updated successfully"
