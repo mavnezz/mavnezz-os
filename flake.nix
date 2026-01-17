@@ -50,7 +50,6 @@
       # Add new hosts here during installation
       surface = mkHost { hostname = "surface"; profile = "intel"; username = "sirjuls44"; };
       homework = mkHost { hostname = "homework"; profile = "intel"; username = "sirjuls44"; };
-      deck = mkHost { hostname = "deck"; profile = "amd"; username = "don"; };
     };
 
     # Flutter development environment (conditional per host)
