@@ -13,6 +13,16 @@
         categories = ["Network" "RemoteAccess"];
         noDisplay = false;
       };
+      snapmaker-orca = {
+        name = "Snapmaker OrcaSlicer";
+        comment = "3D Slicer for Snapmaker";
+        exec = "snapmaker-orca %F";
+        icon = "orca-slicer";
+        terminal = false;
+        type = "Application";
+        categories = ["Graphics" "3DGraphics" "Engineering"];
+        mimeType = ["model/stl" "model/3mf" "application/vnd.ms-3mfdocument"];
+      };
     };
     mimeApps = {
       enable = true;

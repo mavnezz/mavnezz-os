@@ -13,6 +13,7 @@
     ./printing.nix
     ./security.nix
     ./services.nix
+    ./snapmaker-orca.nix
     ./starfish.nix
     ./steam.nix
     ./stylix.nix
