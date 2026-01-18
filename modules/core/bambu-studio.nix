@@ -5,7 +5,7 @@
   version = "2.4.0";
   tag = "v02.04.00.70";
 
-  bambu-studio = pkgs.appimageTools.wrapType2 {
+  bambu-studio-unwrapped = pkgs.appimageTools.wrapType2 {
     pname = "bambu-studio";
     inherit version;
 
@@ -20,8 +20,19 @@
       glib-networking
       gtk3
       libsoup_3
+      openssl
+      cacert
+      curl
+      nss
+      nspr
     ];
   };
+
+  bambu-studio = pkgs.writeShellScriptBin "bambu-studio" ''
+    export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+    export GIO_EXTRA_MODULES="${pkgs.glib-networking}/lib/gio/modules"
+    exec ${bambu-studio-unwrapped}/bin/bambu-studio "$@"
+  '';
 in {
   environment.systemPackages = [bambu-studio];
 
