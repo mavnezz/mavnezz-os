@@ -76,7 +76,6 @@
     php83Packages.composer # PHP Dependency Manager
     nodejs
     #youtube-music
-    pkgs-unstable.orca-slicer # 3D Slicer (Bambu, Prusa, Voron, etc.)
     pkgs-unstable.claude-code # For native development
     pkgs-unstable.nwg-dock-hyprland
     teams-for-linux # Video Meetings

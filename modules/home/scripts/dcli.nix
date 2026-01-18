@@ -243,6 +243,14 @@ in
           echo ""
         fi
 
+        # Update Bambu Studio if script exists
+        if [ -x "$HOME/$PROJECT/scripts/update-bambu-studio.sh" ]; then
+          echo ""
+          echo "Checking for Bambu Studio updates..."
+          "$HOME/$PROJECT/scripts/update-bambu-studio.sh" || echo "⚠ Bambu Studio update check skipped"
+          echo ""
+        fi
+
         echo "Updating flake..."
         if nix flake update; then
           echo "✓ Flake updated successfully"

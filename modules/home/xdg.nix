@@ -23,6 +23,16 @@
         categories = ["Graphics" "3DGraphics" "Engineering"];
         mimeType = ["model/stl" "model/3mf" "application/vnd.ms-3mfdocument"];
       };
+      bambu-studio = {
+        name = "Bambu Studio";
+        comment = "3D Slicer for Bambu Lab printers";
+        exec = "bambu-studio %F";
+        icon = "bambu-studio";
+        terminal = false;
+        type = "Application";
+        categories = ["Graphics" "3DGraphics" "Engineering"];
+        mimeType = ["model/stl" "model/3mf" "application/vnd.ms-3mfdocument"];
+      };
     };
     mimeApps = {
       enable = true;
