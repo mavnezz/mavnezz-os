@@ -25,6 +25,7 @@
       inherit pkgs host profile;
       backupFiles = [
         ".config/mimeapps.list.backup"
+        ".config/libreoffice/4/user/registrymodifications.xcu.backup"
       ];
     })
   ];
