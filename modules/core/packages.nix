@@ -27,6 +27,7 @@
 
   environment.systemPackages = with pkgs; [
     appimage-run # Needed For AppImage Support
+    bc # Calculator For Scripts
     brightnessctl # For Screen Brightness Control
     cmatrix # Matrix Movie Effect In Terminal
     cowsay # Great Fun Terminal Program
@@ -34,6 +35,7 @@
     duf # Utility For Viewing Disk Usage In Terminal
     dysk # disk usage util
     eza # Beautiful ls Replacement
+    fd # Fast File Finder
     ffmpeg # Terminal Video / Audio Editing
     file-roller # Archive Manager
     nautilus # GNOME File Manager
@@ -44,6 +46,7 @@
     gping #graphical ping
     hyprpicker # Color Picker
     inxi # CLI System Information Tool
+    jq # JSON Processor For CLI
     killall # For Killing All Instances Of Programs
     lazydocker # Terminal UI for Docker
     libnotify # For Notifications
@@ -63,12 +66,15 @@
     playerctl # Allows Changing Media Volume Through Scripts
     rclone # Cloud Storage Sync Tool
     ripgrep # Improved Grep
+    shellcheck # Shell Script Linter
     socat # Needed For Screenshots
     sox # audio support for FFMPEG
+    tree # Directory Structure Viewer
     unrar # Tool For Handling .rar Files
     unzip # Tool For Handling .zip Files
     usbutils # Good Tools For USB Devices
     wget # Tool For Fetching Files With Links
+    yq # YAML Processor For CLI
     nwg-displays # Manage Displays
     nwg-drawer # Application Drawer
     # PHP & Laravel Development

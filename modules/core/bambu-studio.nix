@@ -2,16 +2,16 @@
   # Bambu Studio - Version 2.4.0
   # To update: change version/tag and sha256, then run dcli rebuild
   # Find latest at: https://github.com/bambulab/BambuStudio/releases
-  version = "2.4.0";
-  tag = "v02.04.00.70";
+  version = "2.5.0";
+  tag = "v02.05.00.67";
 
   bambu-studio-unwrapped = pkgs.appimageTools.wrapType2 {
     pname = "bambu-studio";
     inherit version;
 
     src = pkgs.fetchurl {
-      url = "https://github.com/bambulab/BambuStudio/releases/download/${tag}/Bambu_Studio_ubuntu-24.04_PR-8834.AppImage";
-      sha256 = "1gfyy7yxgxgn8ica24kkw931q809cmva60qy5d32xpq4rgf0gg16";
+      url = "https://github.com/bambulab/BambuStudio/releases/download/${tag}/Bambu_Studio_ubuntu-24.04_PR-9540.AppImage";
+      sha256 = "1y2rciq5hid7g51wq8z73rl0ma49n0l45y4xsvrrqf7cb9pdkrny";
     };
 
     extraPkgs = pkgs: with pkgs; [
