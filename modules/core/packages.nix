@@ -63,6 +63,7 @@
     pavucontrol # For Editing Audio Levels & Devices
     pciutils # Collection Of Tools For Inspecting PCI Devices
     pkg-config # Wrapper Script For Allowing Packages To Get Info On Others
+    python3 # Python 3 Interpreter
     playerctl # Allows Changing Media Volume Through Scripts
     rclone # Cloud Storage Sync Tool
     ripgrep # Improved Grep
