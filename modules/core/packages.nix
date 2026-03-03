@@ -33,6 +33,8 @@
     cmatrix # Matrix Movie Effect In Terminal
     cowsay # Great Fun Terminal Program
     docker-compose # Allows Controlling Docker From A Single File
+    discord # Voice & Text Chat
+    dotnet-sdk_10 # .NET 10 SDK
     duf # Utility For Viewing Disk Usage In Terminal
     dysk # disk usage util
     eza # Beautiful ls Replacement
@@ -48,6 +50,7 @@
     hyprpicker # Color Picker
     inxi # CLI System Information Tool
     jq # JSON Processor For CLI
+    just # Command Runner
     killall # For Killing All Instances Of Programs
     lazydocker # Terminal UI for Docker
     libnotify # For Notifications
@@ -64,7 +67,10 @@
     pavucontrol # For Editing Audio Levels & Devices
     pciutils # Collection Of Tools For Inspecting PCI Devices
     pkg-config # Wrapper Script For Allowing Packages To Get Info On Others
-    python3 # Python 3 Interpreter
+    (python3.withPackages (ps: with ps; [
+      requests
+      configobj
+    ])) # Python 3 With Packages
     playerctl # Allows Changing Media Volume Through Scripts
     rclone # Cloud Storage Sync Tool
     ripgrep # Improved Grep
