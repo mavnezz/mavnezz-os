@@ -23,6 +23,8 @@
       "$modifier,Y,exec,kitty -e yazi"
       "$modifier SHIFT,E,exec,emopicker9000"
       "$modifier SHIFT,S,exec,screenshootin"
+      ",Print,exec,fullscreenshot"
+      "$modifier,Print,exec,windowshot"
       "$modifier,D,exec,discord"
       "$modifier,S,exec,steam"
       "$modifier SHIFT,O,exec,flatpak run com.obsproject.Studio"

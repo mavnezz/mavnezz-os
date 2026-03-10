@@ -20,6 +20,8 @@
     (import ./rofi-launcher.nix {inherit pkgs;})
     (import ./rofi-power-menu.nix {inherit pkgs config;})
     (import ./screenshootin.nix {inherit pkgs;})
+    (import ./fullscreenshot.nix {inherit pkgs;})
+    (import ./windowshot.nix {inherit pkgs;})
     (import ./hm-find.nix {inherit pkgs;})
     (import ./dcli.nix {
       inherit pkgs host profile;
