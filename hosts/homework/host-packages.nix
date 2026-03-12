@@ -5,5 +5,6 @@
     # audacity
     # discord
     # nodejs
+    unityhub
   ];
 }
