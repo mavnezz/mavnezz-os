@@ -103,7 +103,7 @@
     vlc # Media Player
     anydesk # Remote Desktop
     vivaldi # Browser
-    yubikey-manager-qt # YubiKey Management GUI
+    yubioath-flutter # YubiKey Management GUI
   ];
 
   services.pcscd.enable = true; # Smartcard daemon for YubiKey
