@@ -4,7 +4,7 @@
     ./controller-support.nix
     ./flatpak.nix
     ./fonts.nix
-    ./sddm.nix
+    ./greetd.nix
     ./hardware.nix
     ./network.nix
     ./nfs.nix
