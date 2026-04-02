@@ -104,6 +104,35 @@
     anydesk # Remote Desktop
     vivaldi # Browser
     yubioath-flutter # YubiKey Management GUI
+    (let
+      platformio-fhs = pkgs.buildFHSEnv {
+        name = "platformio";
+        targetPkgs = p: with p; [
+          platformio-core
+          python3
+          python3Packages.pip
+          python3Packages.setuptools
+          zlib
+          libusb1
+        ];
+        runScript = "platformio";
+      };
+      pio-fhs = pkgs.buildFHSEnv {
+        name = "pio";
+        targetPkgs = p: with p; [
+          platformio-core
+          python3
+          python3Packages.pip
+          python3Packages.setuptools
+          zlib
+          libusb1
+        ];
+        runScript = "pio";
+      };
+    in pkgs.symlinkJoin {
+      name = "platformio-fhs";
+      paths = [ platformio-fhs pio-fhs ];
+    }) # IoT/ESP32 Development (FHS-compatible with pip)
   ];
 
   services.pcscd.enable = true; # Smartcard daemon for YubiKey

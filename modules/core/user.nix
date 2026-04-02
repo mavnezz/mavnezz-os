@@ -29,6 +29,7 @@ in {
     description = "${gitUsername}";
     extraGroups = [
       "adbusers"
+      "dialout" # Serial/USB devices (ESP32 etc.)
       "docker"
       "libvirtd" #For VirtManagerr
       "lp"

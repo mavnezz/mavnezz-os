@@ -23,6 +23,7 @@
     (import ./fullscreenshot.nix {inherit pkgs;})
     (import ./windowshot.nix {inherit pkgs;})
     (import ./hm-find.nix {inherit pkgs;})
+    (import ./mouse-jiggler.nix {inherit pkgs;})
     (import ./dcli.nix {
       inherit pkgs host profile;
       backupFiles = [
