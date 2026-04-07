@@ -23,6 +23,7 @@
     "zed"
     "jdk"
     "claude"
+    "vscode-extension-ms-dotnettools-csharp"
   ];
 
   environment.systemPackages = with pkgs; [
