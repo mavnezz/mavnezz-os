@@ -28,7 +28,7 @@
 
   environment.systemPackages = with pkgs; [
     appimage-run # Needed For AppImage Support
-    azure-cli # Azure Command-Line Tools
+    (azure-cli.withExtensions [ azure-cli.extensions.azure-devops ]) # Azure Command-Line Tools
     bc # Calculator For Scripts
     brightnessctl # For Screen Brightness Control
     cmatrix # Matrix Movie Effect In Terminal
