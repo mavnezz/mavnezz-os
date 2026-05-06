@@ -13,8 +13,8 @@
     ./printing.nix
     ./security.nix
     ./services.nix
-    ./bambu-studio.nix
-    ./snapmaker-orca.nix
+    # ./bambu-studio.nix
+    # ./snapmaker-orca.nix
     ./starfish.nix
     ./steam.nix
     ./stylix.nix
