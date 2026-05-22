@@ -41,6 +41,7 @@
     eza # Beautiful ls Replacement
     fd # Fast File Finder
     ffmpeg # Terminal Video / Audio Editing
+    file # libmagic file type identification
     file-roller # Archive Manager
     nautilus # GNOME File Manager
     gdu # graphical disk usage
