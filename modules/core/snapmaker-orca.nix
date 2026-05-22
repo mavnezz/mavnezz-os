@@ -2,7 +2,7 @@
   # Snapmaker OrcaSlicer - Version 2.2.1
   # To update: change version and sha256, then run dcli rebuild
   # Find latest at: https://github.com/Snapmaker/OrcaSlicer/releases
-  version = "2.2.4";
+  version = "2.3.0";
 
   snapmaker-orca-unwrapped = pkgs.appimageTools.wrapType2 {
     pname = "snapmaker-orca";
@@ -10,7 +10,7 @@
 
     src = pkgs.fetchurl {
       url = "https://github.com/Snapmaker/OrcaSlicer/releases/download/v${version}/Snapmaker_Orca_Linux_AppImage_Ubuntu2404_V${version}_Beta.AppImage";
-      sha256 = "07k78y474w9i2cvmj7lhicy6k67nxv12lvngx42vnnqj4di5azbr";
+      sha256 = "16xhv34gbi6w6i9asjw80w866yscd94qfkm46ysxx1ak1vf6wryk";
     };
 
     extraPkgs = pkgs: with pkgs; [
