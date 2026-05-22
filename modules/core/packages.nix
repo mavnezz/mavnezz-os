@@ -47,7 +47,7 @@
     gdu # graphical disk usage
     gedit # Simple Graphical Text Editor
     gimp # Great Photo Editor
-    glxinfo # Needed for inxi -G GPU info
+    mesa-demos # Needed for inxi -G GPU info (provides glxinfo)
     gping #graphical ping
     hyprpicker # Color Picker
     inxi # CLI System Information Tool

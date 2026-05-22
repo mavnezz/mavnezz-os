@@ -91,7 +91,7 @@ pkgs.writeShellScriptBin "rofi-power-menu" ''
 
   # Get answer from user via rofi
   selected_option=$(echo -e "$lock\n$logout\n$sleep\n$reboot\n$shutdown" | \
-    ${pkgs.rofi-wayland}/bin/rofi -dmenu \
+    ${pkgs.rofi}/bin/rofi -dmenu \
       -i \
       -p "Power" \
       -theme "$THEME_FILE")

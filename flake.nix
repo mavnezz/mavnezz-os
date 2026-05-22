@@ -3,14 +3,14 @@
 
   inputs = {
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nvf.url = "github:notashelf/nvf";
-    stylix.url = "github:danth/stylix/release-25.05";
+    stylix.url = "github:danth/stylix/release-25.11";
     flake-utils.url = "github:numtide/flake-utils";
     vicinae.url = "github:vicinaehq/vicinae/24a71cac107f9b42f70ec2015e41ef02f617b1f1";
   };
