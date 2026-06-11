@@ -6,8 +6,8 @@
   ...
 }:
 let
-  niriConfig = if hostName == "prometheus" 
-    then ../config/niri/config.laptop.kdl 
+  niriConfig = if hostName == "surface"
+    then ../config/niri/config.laptop.kdl
     else ../config/niri/config.desktop.kdl;
 in
 {

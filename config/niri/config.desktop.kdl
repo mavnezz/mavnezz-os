@@ -147,33 +147,57 @@ binds {
 
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Shift+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
+    // App launches (mavnezz preferences)
+    Mod+Return hotkey-overlay-title="Terminal: ghostty" { spawn "ghostty"; }
+    Mod+T      hotkey-overlay-title="Terminal: ghostty" { spawn "ghostty"; }
+    Mod+Space  hotkey-overlay-title="App Launcher: fuzzel" { spawn "fuzzel"; }
 
-    // app shortcuts
-    Mod+Z { spawn-sh "flatpak run app.zen_browser.zen"; }
-    Mod+B { spawn "/run/current-system/sw/bin/bitwarden"; }
-    Mod+X { spawn "codium"; }
-    Mod+Shift+J  { spawn "/run/current-system/sw/bin/jellyfin-desktop"; }
-    Mod+M { spawn "/run/current-system/sw/bin/feishin"; }
-    Mod+N { spawn-sh "ghostty -e nvim"; }
-    Mod+Shift+M { spawn-sh "noctalia-shell ipc call plugin togglePanel MediaMini"; }
-    Mod+Space { spawn-sh "noctalia-shell ipc call settings toggle"; }
-    Mod+Shift+Space {spawn-sh "noctalia-shell ipc call controlCenter toggle"; }
-    Mod+Y { spawn-sh "ghostty -e yazi"; }
+    Mod+B      hotkey-overlay-title="Browser"     { spawn "google-chrome-stable"; }
+    Mod+D      hotkey-overlay-title="Discord"     { spawn "discord"; }
+    Mod+S      hotkey-overlay-title="Steam"       { spawn "steam"; }
+    Mod+M      hotkey-overlay-title="Audio Mixer" { spawn "pavucontrol"; }
+    Mod+C      hotkey-overlay-title="Color Picker" { spawn "hyprpicker" "-a"; }
+    Mod+X      hotkey-overlay-title="Logout Menu" { spawn-sh "wlogout --buttons-per-row 6 --column-spacing 20 --row-spacing 20"; }
+    Mod+Y      hotkey-overlay-title="yazi"        { spawn-sh "ghostty -e yazi"; }
+    Mod+N      hotkey-overlay-title="nvim"        { spawn-sh "ghostty -e nvim"; }
+    Mod+K      hotkey-overlay-title="List Keybinds" { spawn "list-keybinds"; }
+
     Mod+Shift+B { spawn-sh "ghostty -e btop"; }
+    Mod+Shift+D hotkey-overlay-title="Display Settings" { spawn "nwg-displays"; }
+    Mod+Shift+E hotkey-overlay-title="Emoji Picker" { spawn "emopicker9000"; }
+    Mod+Shift+O hotkey-overlay-title="OBS Studio" { spawn-sh "flatpak run com.obsproject.Studio"; }
+    Mod+Shift+W hotkey-overlay-title="Web Search" { spawn "web-search"; }
+    Mod+Shift+Z hotkey-overlay-title="Zed"        { spawn "zeditor"; }
+    Mod+Alt+W   hotkey-overlay-title="Wallpaper"  { spawn "wallsetter"; }
+    // Mod+Alt+M { spawn-sh "appimage-run ~/Moonlight-6.1.0-x86_64.AppImage"; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    Mod+Shift+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
+
+    // Noctalia panels and media
+    Mod+Shift+M     { spawn-sh "noctalia-shell ipc call plugin togglePanel mediaMini"; }
+    Ctrl+Alt+Space  { spawn-sh "noctalia-shell ipc call media playPause"; }
+    Ctrl+Alt+Left   { spawn-sh "noctalia-shell ipc call media previous"; }
+    Ctrl+Alt+Right  { spawn-sh "noctalia-shell ipc call media next"; }
+
+    // Audio + brightness
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "+5%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
 
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    // Screenshots — user's scripts
+    Print            { spawn "fullscreenshot"; }
+    Mod+Print        { spawn "windowshot"; }
+    Mod+Shift+S      { spawn "screenshootin"; }
+    Shift+Print      { screenshot; }
 
+    // Window/column management
     Mod+O repeat=false { toggle-overview; }
-
     Mod+Q repeat=false { close-window; }
 
     Mod+Left  { focus-column-left; }
@@ -182,17 +206,16 @@ binds {
     Mod+Right { focus-column-right; }
     Mod+H     { focus-column-left; }
     Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
-    Mod+L     { focus-column-right; }
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R  { reset-window-height; }
 
     Mod+Ctrl+Left  { move-column-left; }
     Mod+Ctrl+Down  { move-window-down; }
     Mod+Ctrl+Up    { move-window-up; }
     Mod+Ctrl+Right { move-column-right; }
-    Mod+Ctrl+H     { move-column-left; }
-    Mod+Ctrl+J     { move-window-down; }
-    Mod+Ctrl+K     { move-window-up; }
-    Mod+Ctrl+L     { move-column-right; }
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
@@ -201,30 +224,23 @@ binds {
 
     Mod+Ctrl+Shift+Page_Down { move-column-to-workspace-down; }
     Mod+Ctrl+Shift+Page_Up   { move-column-to-workspace-up; }
-    Mod+Ctrl+Shift+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+Shift+I         { move-column-to-workspace-up; }
-
-    // Workspace movement
     Mod+Shift+Page_Down { move-workspace-down; }
     Mod+Shift+Page_Up   { move-workspace-up; }
-    Mod+Shift+U         { move-workspace-down; }
-    Mod+Shift+I         { move-workspace-up; }
-
-    Mod+Page_Down      { focus-workspace-down; }
-    Mod+Page_Up        { focus-workspace-up; }
-    Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
+    Mod+Page_Down       { focus-workspace-down; }
+    Mod+Page_Up         { focus-workspace-up; }
+    Mod+U               { focus-workspace-down; }
+    Mod+I               { focus-workspace-up; }
 
     Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
     Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
     Mod+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
     Mod+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
-
-    Mod+WheelScrollRight      { focus-column-right; }
-    Mod+WheelScrollLeft       { focus-column-left; }
+    Mod+WheelScrollRight       { focus-column-right; }
+    Mod+WheelScrollLeft        { focus-column-left; }
     Mod+Shift+WheelScrollRight { move-column-right; }
     Mod+Shift+WheelScrollLeft  { move-column-left; }
 
+    // Workspace 1-9
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
     Mod+3 { focus-workspace 3; }
@@ -244,70 +260,38 @@ binds {
     Mod+Shift+8 { move-column-to-workspace 8; }
     Mod+Shift+9 { move-column-to-workspace 9; }
 
+    Mod+Tab { focus-workspace-previous; }
 
-    // Switches focus between the current and the previous workspace.
-     Mod+Tab { focus-workspace-previous; }
-
-    // The following binds move the focused window in and out of a column.
-    // If the window is alone, they will consume it into the nearby column to the side.
-    // If the window is already in a column, they will expel it out.
+    // Column consume/expel
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
-
-    // Consume one window from the right to the bottom of the focused column.
     Mod+Comma  { consume-window-into-column; }
-    // Expel the bottom window from the focused column to the right.
     Mod+Period { expel-window-from-column; }
 
     Mod+R { switch-preset-column-width; }
-    // Cycling through the presets in reverse order is also possible.
-    // Mod+R { switch-preset-column-width-back; }
-
-    // SPLIT duplicate Mod+Shift+R into Shift vs Ctrl
-    Mod+Shift+R { switch-preset-window-height; }
-    Mod+Ctrl+R  { reset-window-height; }
 
     Mod+F       { maximize-column; }
-
-    // SPLIT duplicate Mod+Shift+F into Shift vs Ctrl
     Mod+Shift+F { fullscreen-window; }
-    // Makes the column "fill the rest of the space".
     Mod+Ctrl+F  { expand-column-to-available-width; }
 
-    Mod+C { center-column; }
-
-    // Center all fully visible columns on screen.
+    Mod+Ctrl+C { center-column; }
     Mod+Shift+C { center-visible-columns; }
 
-    // Finer width adjustments.
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
-
-    // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
-    // Move the focused window between the floating and the tiling layout.
+    // Floating / tabbed display
     Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-
-    // Toggle tabbed column display mode.
-    // Windows in this column will appear as vertical tabs,
-    // rather than stacked on top of each other.
-    Mod+W { toggle-column-tabbed-display; }
-
-    Mod+Shift+S { screenshot; }
-    Shift+Print { screenshot-screen; }
-    Alt+Print  { screenshot-window; }
+    Mod+W       { toggle-column-tabbed-display; }
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    // The quit action will show a confirmation dialog to avoid accidental exits.
-    Mod+Shift+E { quit; }
+    // Quit (the niri session) — no Mod+Shift+E because that's emoji
     Shift+Alt+Delete { quit; }
 
-    // Powers off the monitors. To turn them back on, do any input like
-    // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 }
 
