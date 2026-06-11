@@ -43,7 +43,7 @@ in
 
         initial_session = {
           command = "niri-session";
-          user = "gumbo";
+          user = "sirjuls44";
         };
       };
     };

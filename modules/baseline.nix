@@ -39,15 +39,15 @@ in
       options = "--delete-older-than 7d";
     };
 
-    time.timeZone = "America/Chicago";
+    time.timeZone = "Europe/Berlin";
 
-    i18n.defaultLocale = "en_US.UTF-8";
+    i18n.defaultLocale = "de_DE.UTF-8";
     console = {
       font = "Lat2-Terminus16";
-      keyMap = "us";
+      keyMap = "de";
     };
 
-    users.users.gumbo = {
+    users.users.sirjuls44 = {
       isNormalUser = true;
       shell = pkgs.zsh;
       extraGroups = [
@@ -58,7 +58,6 @@ in
         "video"
         "audio"
         "libvirtd"
-        "borg"
       ];
     };
 

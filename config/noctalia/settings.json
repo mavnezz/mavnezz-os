@@ -137,7 +137,7 @@
         {
           "colorizeDistroLogo": false,
           "colorizeSystemIcon": "none",
-          "customIconPath": "/home/gumbo/Downloads/gentoo-3d.png",
+          "customIconPath": "/home/sirjuls44/Downloads/gentoo-3d.png",
           "enableColorization": false,
           "icon": "noctalia",
           "id": "ControlCenter",
@@ -148,7 +148,7 @@
     "screenOverrides": []
   },
   "general": {
-    "avatarImage": "/home/gumbo/.face",
+    "avatarImage": "/home/sirjuls44/.face",
     "dimmerOpacity": 0.2,
     "showScreenCorners": false,
     "forceBlackScreenCorners": false,
@@ -224,7 +224,7 @@
   "wallpaper": {
     "enabled": true,
     "overviewEnabled": false,
-    "directory": "/home/gumbo/git-repos/walls",
+    "directory": "/home/sirjuls44/git-repos/walls",
     "monitorDirectories": [],
     "enableMultiMonitorDirectories": false,
     "showHiddenFiles": false,

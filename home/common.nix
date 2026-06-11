@@ -8,9 +8,9 @@
 {
 
   home = {
-    username = "gumbo";
-    homeDirectory = "/home/gumbo";
-    stateVersion = "25.05";
+    username = "sirjuls44";
+    homeDirectory = "/home/sirjuls44";
+    stateVersion = "23.11";
   };
   
   programs.home-manager.enable = true;
