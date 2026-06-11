@@ -160,7 +160,7 @@ binds {
     Mod+X      hotkey-overlay-title="Logout Menu" { spawn-sh "wlogout --buttons-per-row 6 --column-spacing 20 --row-spacing 20"; }
     Mod+Y      hotkey-overlay-title="yazi"        { spawn-sh "ghostty -e yazi"; }
     Mod+N      hotkey-overlay-title="nvim"        { spawn-sh "ghostty -e nvim"; }
-    Mod+K      hotkey-overlay-title="List Keybinds" { spawn "list-keybinds"; }
+    Mod+K      hotkey-overlay-title="Show Keybinds" { show-hotkey-overlay; }
 
     Mod+Shift+B { spawn-sh "ghostty -e btop"; }
     Mod+Shift+D hotkey-overlay-title="Display Settings" { spawn "nwg-displays"; }

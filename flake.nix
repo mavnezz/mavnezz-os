@@ -82,6 +82,7 @@
       ./home/zsh.nix
       ./home/niri.nix
       ./home/vscode.nix
+      ./home/scripts
     ];
 
   in {
