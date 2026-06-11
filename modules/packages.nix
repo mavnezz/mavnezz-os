@@ -8,6 +8,7 @@ let
   cfg = config.workstation.baseline.packages;
   future-cursors = pkgs.callPackage ../pkgs/future-cursor.nix { };
   toolsPackages = with pkgs; [
+    # sensei defaults
     yubikey-manager
     wget
     git
@@ -36,6 +37,40 @@ let
     unzip
     parallel
     future-cursors
+    # mavnezz CLI grab-bag
+    appimage-run
+    bat
+    bc
+    brightnessctl
+    btop
+    cava
+    cmatrix
+    cowsay
+    dysk
+    duf
+    fd
+    fzf
+    gdu
+    gping
+    gum
+    inxi
+    jq
+    killall
+    lolcat
+    lshw
+    mesa-demos
+    ncdu
+    nitch
+    onefetch
+    rclone
+    ripgrep
+    shellcheck
+    socat
+    sox
+    tealdeer
+    unrar
+    yq
+    zoxide
   ];
 
   devPackages = with pkgs; [
