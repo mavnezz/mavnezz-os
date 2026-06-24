@@ -20,6 +20,17 @@
           ms-azuretools.vscode-docker
           esbenp.prettier-vscode
         ];
+
+        userSettings = {
+          # The extension's bundled `claude` binary is dynamically linked and
+          # does not run on NixOS; point it at the nix-built CLI from
+          # pkgs-unstable.claude-code instead.
+          "claudeCode.claudeProcessWrapper" = "/run/current-system/sw/bin/claude";
+
+          # Skip the welcome/getting-started page on startup.
+          "workbench.startupEditor" = "none";
+          "workbench.welcomePage.walkthroughs.openOnInstall" = false;
+        };
       };
     };
   };
