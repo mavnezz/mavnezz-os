@@ -56,7 +56,4 @@ in
     email = vars.gitEmail;
   };
 
-  swapDevices = lib.mkDefault [
-    { device = "/swapfile"; size = 8192; }
-  ];
 }
