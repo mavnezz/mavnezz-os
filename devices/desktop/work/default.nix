@@ -46,7 +46,7 @@ in
       browsers.enable   = true;
       media.enable      = true;
       security.enable   = true;
-      steam.enable      = false;  # work machine, no gaming
+      steam.enable      = true;
       syncthing.enable  = false;
     };
   };
