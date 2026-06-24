@@ -26,7 +26,6 @@ in
       rose-pine-cursor
       papirus-icon-theme
       nemo
-      fuzzel
       gpu-screen-recorder
       wl-clipboard
       libsForQt5.qt5ct

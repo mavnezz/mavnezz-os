@@ -1,6 +1,12 @@
 // Desktop Niri Config
 input {
 
+    keyboard {
+        xkb {
+            layout "de"
+        }
+    }
+
     mouse {
         // off
         // natural-scroll
@@ -46,7 +52,7 @@ layout {
     }
 }
 
-spawn-at-startup "noctalia-shell"
+spawn-at-startup "noctalia"
 
 hotkey-overlay {
      skip-at-startup
@@ -150,7 +156,7 @@ binds {
     // App launches (mavnezz preferences)
     Mod+Return hotkey-overlay-title="Terminal: ghostty" { spawn "ghostty"; }
     Mod+T      hotkey-overlay-title="Terminal: ghostty" { spawn "ghostty"; }
-    Mod+Space  hotkey-overlay-title="App Launcher: fuzzel" { spawn "fuzzel"; }
+    Mod+Space  hotkey-overlay-title="App Launcher: noctalia" { spawn-sh "noctalia msg panel-toggle launcher"; }
 
     Mod+B      hotkey-overlay-title="Browser"     { spawn "google-chrome-stable"; }
     Mod+D      hotkey-overlay-title="Discord"     { spawn "discord"; }
@@ -171,13 +177,13 @@ binds {
     Mod+Alt+W   hotkey-overlay-title="Wallpaper"  { spawn "wallsetter"; }
     // Mod+Alt+M { spawn-sh "appimage-run ~/Moonlight-6.1.0-x86_64.AppImage"; }
 
-    Mod+Shift+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
+    Mod+Shift+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia ipc call lockScreen lock"; }
 
     // Noctalia panels and media
-    Mod+Shift+M     { spawn-sh "noctalia-shell ipc call plugin togglePanel mediaMini"; }
-    Ctrl+Alt+Space  { spawn-sh "noctalia-shell ipc call media playPause"; }
-    Ctrl+Alt+Left   { spawn-sh "noctalia-shell ipc call media previous"; }
-    Ctrl+Alt+Right  { spawn-sh "noctalia-shell ipc call media next"; }
+    Mod+Shift+M     { spawn-sh "noctalia ipc call plugin togglePanel mediaMini"; }
+    Ctrl+Alt+Space  { spawn-sh "noctalia ipc call media playPause"; }
+    Ctrl+Alt+Left   { spawn-sh "noctalia ipc call media previous"; }
+    Ctrl+Alt+Right  { spawn-sh "noctalia ipc call media next"; }
 
     // Audio + brightness
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+"; }
@@ -190,11 +196,8 @@ binds {
     XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "+5%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
 
-    // Screenshots — user's scripts
-    Print            { spawn "fullscreenshot"; }
-    Mod+Print        { spawn "windowshot"; }
-    Mod+Shift+S      { spawn "screenshootin"; }
-    Shift+Print      { screenshot; }
+    // Screenshots — niri built-in
+    Mod+Shift+S { screenshot; }
 
     // Window/column management
     Mod+O repeat=false { toggle-overview; }

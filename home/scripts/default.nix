@@ -6,9 +6,6 @@
     (import ./nvidia-offload.nix { inherit pkgs; })
     (import ./wallsetter.nix { inherit pkgs; })
     (import ./web-search.nix { inherit pkgs; })
-    (import ./screenshootin.nix { inherit pkgs; })
-    (import ./fullscreenshot.nix { inherit pkgs; })
-    (import ./windowshot.nix { inherit pkgs; })
     (import ./hm-find.nix { inherit pkgs; })
     (import ./mouse-jiggler.nix { inherit pkgs; })
     (import ./dcli.nix {
