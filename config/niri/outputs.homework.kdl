@@ -1,0 +1,5 @@
+// homework — single ultrawide monitor. Niri uses the preferred mode and
+// scale 1 by default; add an explicit `output "<name>" { ... }` block here
+// if mode/scale/position tweaks are needed.
+//
+// Discover the connected output name with `niri msg outputs`.

@@ -9,6 +9,7 @@ let
   niriConfig = if hostName == "surface"
     then ../config/niri/config.laptop.kdl
     else ../config/niri/config.desktop.kdl;
+  niriOutputs = ../config/niri + "/outputs.${hostName}.kdl";
 in
 {
   gtk = {
@@ -43,6 +44,7 @@ in
     "gtk-4.0/settings.ini".force = true;
     "gtk-4.0/gtk.css".force = true;
     "niri/config.kdl".source = niriConfig;
+    "niri/outputs.kdl".source = niriOutputs;
     "niri/noctalia.kdl".source = ../config/niri/noctalia.kdl;
     "ghostty/config".source = ../config/ghostty/tokyo-night.ghostty;
   };
