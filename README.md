@@ -2,25 +2,20 @@
 
 ![Projektlogo](img/desktop.png)
 
-A customized NixOS configuration based on ZaneyOS by Tyler Kelley, and theblackdon tailored for multiple host setups with NVIDIA GPU support.
+A personal NixOS configuration for managing multiple machines from a single flake.
 
 ## Overview
-mavnezz-os is a personalized NixOS configuration that supports multiple host computers with different hardware profiles. It features a modern minimal desktop environment with Hyprland, extensive customization options, and easy multi-host management.
+mavnezz-os is a NixOS configuration that manages multiple host computers (desktop + laptop) from one repo. It features a Niri scrollable-tiling Wayland compositor with the Noctalia shell.
 
-The configuration is built with modularity in mind - each host can have different features enabled or disabled (like NFS, printing, gaming controller support, Flutter development environment, etc.), custom keybinds and window rules, and personalized theming. It includes the Vicinae launcher by default for a smooth application launching experience.
+The configuration is built with modularity in mind - each host has its own NixOS module under `devices/<form>/<host>/` and shares a common Home Manager layer.
 
 ## Features
 
 - 🖥️ **Multi-Host Support** - Easy configuration management for multiple computers
-- 🎮 **NVIDIA GPU Optimized** - Full support for NVIDIA graphics with proper drivers
-- 🌊 **Hyprland Desktop** - Modern Wayland compositor with beautiful animations
-- 🎨 **Stylix Integration** - System-wide theming and styling
+- 🪟 **Niri Compositor** - Scrollable-tiling Wayland compositor with the Noctalia shell
 - 📦 **Flake-based Configuration** - Reproducible and declarative system management
-- 🔧 **Easy Host Setup** - Automated script for adding new computers
 - ⚡ **dcli Tool** - Custom CLI utility for multi-host system management
-- 🎛️ **Modular Features** - Toggle features per host (NFS, printing, gaming controllers, etc.)
-- ⌨️ **Per-Host Customization** - Host-specific keybinds and window rules for Hyprland
-- 🚀 **Vicinae Launcher** - Modern application launcher enabled by default
+- 🎛️ **Modular Features** - Toggle features per host via `workstation.*` options
 
 ## Installation
 
@@ -34,36 +29,17 @@ If you want to install mavnezz-os on a fresh NixOS system:
    nix-shell -p git pciutils
    ```
 
-3. Run the installation script:
+3. Clone the repo and build for the target host:
    ```bash
-   sh <(curl -sL https://raw.githubusercontent.com/mavnezz/mavnezz-os/main/install-mavnezz-os.sh)
+   git clone https://github.com/mavnezz/mavnezz-os.git ~/mavnezz-os
+   cd ~/mavnezz-os
+   sudo nixos-rebuild switch --flake .#<hostname>
    ```
 
-The installer will:
-- Detect your hardware (GPU, etc.)
-- Guide you through hostname and user configuration
-- Clone the repository and set up your configuration
-- Build and install mavnezz-os
-- Create a personalized setup for your computer
+**After Installation:** Customize monitor settings in your Niri config:
 
-**After Installation:** You may need to customize monitor settings and GPU IDs in your `hosts/YOUR-HOST/variables.nix` file:
-
-- **Monitor Configuration:** Update `extraMonitorSettings` with your actual monitor setup
-- **NVIDIA Prime:** Update `intelID` and `nvidiaID` with your actual GPU PCI IDs (find with `lspci | grep VGA`)
+- **Monitor Configuration:** Edit the `output` blocks in `config/niri/config.desktop.kdl` or `config.laptop.kdl`
 - **Wallpapers:** Choose your preferred wallpaper from the `wallpapers/` directory
-
-### For Existing mavnezz-os Users
-If you already have mavnezz-os and want to add a new computer:
-
-```shell
-./setup-new-host.sh
-```
-
-This will guide you through:
-- Choosing a hostname
-- Selecting GPU profile (nvidia, nvidia-laptop, amd, intel, vm)
-- Configuring user settings
-- Creating installation guide for the new computer
 
 ## Building for a Specific Host
 
@@ -76,122 +52,55 @@ dcli deploy homework        # Build and switch
 nixos-rebuild build --flake .#homework
 ```
 
-## Installing on New Hardware
-
-1. Boot NixOS installer ISO on target computer
-2. Follow the host-specific installation guide (e.g., `INSTALL-homework.md`)
-3. Clone this repository and run the installation commands
-
 ## Directory Structure
 
 ```
 mavnezz-os/
-├── hosts/                    # Host-specific configurations
-│   ├── homework/            # Desktop configuration
-│   ├── surface/             # Surface laptop configuration
-│   └── default/             # Template host
-├── profiles/                 # Hardware profiles
-│   ├── nvidia/              # Desktop NVIDIA
-│   ├── nvidia-laptop/       # Laptop NVIDIA/Intel hybrid
-│   ├── amd/                 # AMD graphics
-│   ├── intel/               # Intel graphics
-│   └── vm/                  # Virtual machine
-├── modules/                  # System modules
-│   ├── core/                # Core system configuration
-│   ├── drivers/             # Hardware drivers
-│   └── home/                # Home manager configuration
+├── devices/                 # Per-machine NixOS modules
+│   ├── desktop/
+│   │   ├── homework/
+│   │   └── work/
+│   └── laptop/
+│       └── surface/
+├── modules/                 # System modules (niri, packages, ...)
+├── home/                    # Home Manager imports (shared across hosts)
+├── config/niri/             # Niri KDL configs + Noctalia shell config
+├── pkgs/                    # Custom Nix derivations
 ├── wallpapers/              # Desktop wallpapers
-├── setup-new-host.sh        # New host setup script
-├── flake.nix               # Main flake configuration
-└── INSTALL-*.md            # Host-specific install guides
+└── flake.nix                # Main flake configuration
 ```
 
 ## Host Configuration
-Each host has its own directory under `hosts/` containing:
+Each host has its own directory under `devices/<form>/<host>/` containing:
 
-- `default.nix` - Main host imports
+- `default.nix` - Imports `hardware.nix` and enables `workstation.*` options
 - `hardware.nix` - Hardware-specific configuration (generated by nixos-generate-config)
-- `variables.nix` - Host-specific settings (monitors, GPU IDs, preferences)
-- `host-packages.nix` - Host-specific package list
 
-### Key Settings in variables.nix
-
-```nix
-{
-  # Monitor configuration (host-specific)
-  extraMonitorSettings = ''
-    monitor=HDMI-A-1,3440x1440@100.0,3330x1444,1.0
-    monitor=eDP-1,2560x1600@165.02,6770x1558,1.33
-  '';
-
-  # GPU IDs for NVIDIA Prime
-  intelID = "PCI:34:0:0";
-  nvidiaID = "PCI:1:0:0";
-
-  # Desktop preferences
-  browser = "vivaldi";
-  terminal = "kitty";
-  stylixImage = ../../wallpapers/Valley.jpg;
-
-  # Modular Features (enable/disable per host)
-  enableNFS = true;
-  printEnable = false;
-  thunarEnable = true;
-  controllerSupportEnable = true;
-  flutterdevEnable = false;
-  stylixEnable = true;
-}
-```
-
-## GPU Profiles
-
-### NVIDIA Desktop (nvidia)
-- Dedicated NVIDIA GPU
-- No hybrid graphics
-- Best for gaming desktops
-
-### NVIDIA Laptop (nvidia-laptop)
-- NVIDIA + Intel hybrid graphics
-- NVIDIA Prime support
-- Power-efficient for laptops
-
-### AMD (amd)
-- AMD Radeon graphics
-- Open-source AMDGPU drivers
-
-### Intel (intel)
-- Intel integrated graphics
-- Lightweight and efficient
-
-### VM (vm)
-- Virtual machine optimized
-- Minimal graphics requirements
+Per-host Niri configuration lives in `config/niri/config.desktop.kdl` and `config.laptop.kdl`; the right one is selected automatically by `home/niri.nix` based on the host name.
 
 ## Customization
 
 ### Adding a New Host
-1. Run the setup script: `./setup-new-host.sh`
-2. Customize `hosts/NEW-HOST/variables.nix`
+1. Create `devices/<form>/<host>/{default.nix,hardware.nix}`
+2. Add the host to `nixosConfigurations` in `flake.nix`
 3. Test build: `nixos-rebuild build --flake .#NEW-HOST`
-4. Commit changes and follow installation guide
 
 ### Updating Existing Hosts
-1. Edit host-specific files in `hosts/HOST-NAME/`
+1. Edit `devices/<form>/<host>/default.nix` to toggle `workstation.*` options
 2. Test changes: `dcli build HOST-NAME`
 3. Apply: `dcli deploy HOST-NAME` or `dcli rebuild` (for current host)
 
 ### Adding System Packages
-- Edit `modules/core/packages.nix` for system-wide packages
-- Edit `hosts/HOST/host-packages.nix` for host-specific packages
+- Edit `modules/packages.nix` for the shared baseline (toggled by `workstation.baseline.packages.*`)
+- Edit `modules/niri.nix` for desktop-environment-specific packages
 
 ### Desktop Customization
-- **Wallpapers:** Add to `wallpapers/` and reference in `variables.nix`
-- **Waybar themes:** Choose in `variables.nix` `waybarChoice`
-- **Animations:** Select in `variables.nix` `animChoice`
-- **Colors:** Stylix handles theming from wallpaper
+- **Wallpapers:** Add to `wallpapers/`
+- **Niri keybinds & rules:** Edit `config/niri/config.desktop.kdl` or `config.laptop.kdl`
+- **Noctalia shell:** Edit `config/niri/noctalia.kdl`
 
-## dcli - Don CLI Utility
-mavnezz-os includes `dcli`, a custom command-line utility for managing your multi-host setup:
+## dcli — CLI Utility
+mavnezz-os includes `dcli`, a custom command-line utility for managing the multi-host setup:
 
 ### Common Commands
 ```bash
@@ -213,25 +122,6 @@ dcli switch-host    # Interactive host switcher
 
 See `dcli.md` for complete documentation.
 
-## Development
-
-### Repository Management
-This is a fork of ZaneyOS with personal customizations:
-
-- **Origin:** Your fork at git@github.com:mavnezz/mavnezz-os.git
-- **Upstream:** theblackdon fork at https://gitlab.com/theblackdon/black-don-os.git
-- **Upstream:** Original ZaneyOS at https://gitlab.com/zaney/zaneyos.git
-
-### Updating from Upstream
-```bash
-# Fetch updates from original ZaneyOS
-dcli pull           # Pull from your fork
-git fetch upstream  # Fetch from original ZaneyOS
-
-# Merge updates (be careful with conflicts)
-git merge upstream/stable-2.3
-```
-
 ## Troubleshooting
 
 ### Build Failures
@@ -248,7 +138,7 @@ dcli cleanup
 
 ### Hardware Detection
 ```bash
-# Find GPU IDs for NVIDIA Prime
+# Find GPU IDs
 lspci | grep VGA
 
 # Generate new hardware config
@@ -258,27 +148,17 @@ sudo nixos-generate-config --show-hardware-config
 ### Monitor Configuration
 ```bash
 # List available outputs
-hyprctl monitors
-
-# Test monitor setup
-hyprctl keyword monitor "HDMI-A-1,1920x1080@60,0x0,1"
+niri msg outputs
 ```
+
+Adjust the `output` blocks in the relevant `config/niri/config.*.kdl` to change resolution, refresh rate, scale, or position.
 
 ## Credits
 
-- **ZaneyOS:** Original configuration by Tyler Kelley
 - **NixOS:** The foundation of this configuration
-- **Hyprland:** Wayland compositor
-- **Stylix:** System theming
+- **Niri:** Scrollable-tiling Wayland compositor
+- **Noctalia:** Shell / status bar
 - **Home Manager:** User environment management
 
 ## License
-Based on ZaneyOS, following the same license terms. See LICENSE file for details.
-
-## Support
-For issues specific to mavnezz-os customizations:
-- Check host-specific installation guides
-- Review the troubleshooting section
-- Refer to the original ZaneyOS documentation for base functionality
-
-**Happy computing with mavnezz-os! 🚀**
+See LICENSE file for details.

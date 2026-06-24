@@ -1,6 +1,6 @@
 {
   gitUsername = "mavnezz";
-  gitEmail = "githubb.com@stuch.me";
+  gitEmail = "github.com@stuch.me";
 
   niriOutputScale = 1.0;
 }

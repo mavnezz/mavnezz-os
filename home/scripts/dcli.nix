@@ -20,7 +20,7 @@ pkgs.writeShellScriptBin "dcli" ''
 
   # --- Helper Functions ---
   print_help() {
-    echo "Black Don OS CLI Utility -- version $VERSION"
+    echo "mavnezz-os CLI Utility -- version $VERSION"
     echo ""
     echo "Usage: dcli [command]"
     echo ""
@@ -172,7 +172,7 @@ pkgs.writeShellScriptBin "dcli" ''
     diag)
       echo "Generating system diagnostic report..."
       {
-        echo "=== Black Don OS System Diagnostic Report ==="
+        echo "=== mavnezz-os System Diagnostic Report ==="
         echo "Generated: $(date)"
         echo "Host: $HOST"
         echo ""

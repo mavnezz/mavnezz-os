@@ -1,6 +1,6 @@
-# Don CLI (dcli) - Version 2.0.0
+# dcli — Version 3.0.0
 
-dcli is a command-line utility for managing your Black Don OS multi-host setup with ease. It provides convenient commands for system management, multi-host operations, and maintenance tasks.
+dcli is a command-line utility for managing the mavnezz-os multi-host setup. It provides convenient commands for system management, multi-host operations, and maintenance tasks.
 
 ## Usage
 
@@ -93,13 +93,13 @@ dcli comes with convenient shell aliases for common operations:
 
 ### Git Commands
 
-- **📝 commit [message]**: Adds all changes in your Black Don OS directory and commits them with the specified message. If no message is provided, you'll be prompted to enter one.
+- **📝 commit [message]**: Adds all changes in your mavnezz-os directory and commits them with the specified message. If no message is provided, you'll be prompted to enter one.
 
 - **⬆️ push**: Pushes your committed changes to your GitLab fork. Automatically detects the current branch.
 
 - **⬇️ pull**: Pulls the latest changes from your GitLab fork to keep your local copy up to date.
 
-- **📊 status**: Shows the current git status of your Black Don OS directory, including modified files and branch information.
+- **📊 status**: Shows the current git status of your mavnezz-os directory, including modified files and branch information.
 
 ## Multi-Host Workflow Examples
 
@@ -167,8 +167,8 @@ dcli deploy homework
 
 dcli automatically detects:
 - **Current Host**: From the system hostname
-- **Project Directory**: `~/black-don-os`
-- **Available Hosts**: From the `hosts/` directory
+- **Project Directory**: `~/mavnezz-os`
+- **Available Hosts**: From the `devices/` directory
 - **Current Profile**: From your flake configuration
 
 ## Troubleshooting
@@ -192,7 +192,7 @@ dcli build [hostname]
 If you get "Host not found" errors:
 1. Check available hosts: `dcli list-hosts`
 2. Ensure you're in the correct directory
-3. Verify the host directory exists in `hosts/`
+3. Verify the host directory exists under `devices/`
 
 ### Permission Issues
 Some commands require sudo privileges:
@@ -206,31 +206,3 @@ If git commands fail:
 2. Ensure you have proper Git credentials configured
 3. Verify your remote is set up correctly
 
-## Migration from zcli
-
-If you were previously using ZaneyOS's `zcli`, here are the key differences:
-
-| Old Command | New Command | Notes |
-| ----------- | ----------- | ----- |
-| `zcli rebuild` | `dcli rebuild` | Now works with proper hostname detection |
-| `zcli update` | `dcli update` | Same functionality, better multi-host support |
-| `fr` (old) | `fr` (new) | Now uses `dcli rebuild` instead of direct `nh` |
-| `fu` (old) | `fu` (new) | Now uses `dcli update` instead of direct `nh` |
-| N/A | `dcli build [HOST]` | New: Build specific host configurations |
-| N/A | `dcli deploy [HOST]` | New: Deploy to specific hosts |
-| N/A | `dcli list-hosts` | New: List available hosts |
-
-## Version History
-
-- **2.0.0**: Complete rewrite for Black Don OS multi-host support
-  - Added multi-host commands (`build`, `deploy`, `list-hosts`)
-  - Improved git integration
-  - Better error handling and validation
-  - Host-aware operations
-  - Enhanced diagnostics
-
-- **1.0.1**: Original ZaneyOS zcli version
-
----
-
-*Happy computing with Black Don OS! 🚀*

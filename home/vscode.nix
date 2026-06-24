@@ -8,6 +8,7 @@
     profiles = {
       default = {
         extensions = with pkgs.vscode-extensions; [
+          anthropic.claude-code
           jnoortheen.nix-ide
           jeff-hykin.better-nix-syntax
           mads-hartmann.bash-ide-vscode

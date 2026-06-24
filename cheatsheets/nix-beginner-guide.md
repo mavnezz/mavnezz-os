@@ -1,58 +1,48 @@
-# ZaneyOS Beginner’s Guide to Customization
+# mavnezz-os Beginner’s Guide to Customization
 
-Welcome! This guide is for users who are new to Nix and want to make common, safe customizations to their ZaneyOS setup. We’ll keep it simple and focus on essentials.
+Welcome! This guide is for users who are new to Nix and want to make common, safe customizations to their mavnezz-os setup. We’ll keep it simple and focus on essentials.
 
 ## Repository layout (where to change things)
 
 - `flake.nix`: Entry point for the whole system. You generally don’t need to edit this for day‑to‑day tweaks.
-- `hosts/`: Per‑machine configuration.
-  - `hosts/<your-hostname>/`
-    - `variables.nix`: Your main control panel (enable/disable features, set options).
-    - `host-packages.nix`: Extra packages only for this one machine.
-- `modules/`: Reusable building blocks for the system and Home Manager.
-  - `modules/core/global-packages.nix`: Packages installed on all machines.
-  - `modules/home/hyprland/binds.nix`: Hyprland keybindings.
+- `devices/<form>/<hostname>/`: Per‑machine NixOS module — toggles features via `workstation.*` options and imports `hardware.nix`.
+- `modules/`: Reusable building blocks. `modules/packages.nix` holds the shared baseline package set; `modules/niri.nix` wires up the compositor and shell.
+- `home/`: Shared Home Manager imports (`niri.nix`, `common.nix`, `zsh.nix`, ...).
+- `config/niri/`: Niri compositor configs (`config.desktop.kdl`, `config.laptop.kdl`) and Noctalia shell config (`noctalia.kdl`).
 
 ## Installing packages
 
 Two common patterns:
 
 ### 1) Only on this machine
-Edit `hosts/<your-hostname>/host-packages.nix` and add the package name:
-
-```nix
-[
-  brave
-  (catppuccin-vsc.override {
-    variant = "mocha";
-  })
-  cowsay
-]
-```
+Add the package to `environment.systemPackages` inside `devices/<form>/<hostname>/default.nix`.
 
 ### 2) On all machines
-Edit `modules/core/global-packages.nix` and add the package to the list.
+Edit `modules/packages.nix` and add the package to the relevant list (`toolsPackages`, `devPackages`, or `appsPackages`).
 
 ## Monitor settings (per host)
 
-Edit `hosts/<your-hostname>/variables.nix` and set the extra monitor line(s):
+Edit `config/niri/config.desktop.kdl` (or `config.laptop.kdl` for laptops) and adjust the `output` block:
 
-```nix
-# Example: 1080p at 144 Hz on DP-1
-extraMonitorSettings = "monitor=DP-1,1920x1080@144";
+```kdl
+output "DP-1" {
+    mode "1920x1080@144"
+    position x=0 y=0
+    scale 1.0
+}
 ```
 
-## Change Hyprland keybindings
+## Change Niri keybindings
 
-Edit `modules/home/hyprland/binds.nix`. For example, change terminal from Super+T to Super+Return:
+Edit the `binds {}` section in `config/niri/config.desktop.kdl` (or `config.laptop.kdl`). For example:
 
-```nix
-"SUPER, T, exec, ${terminal}"
+```kdl
+Mod+Return { spawn "ghostty"; }
 ```
 
 ## Apply and test your changes
 
-Preferred (BDOS-specific):
+Preferred:
 - `dcli rebuild`
   - Note: The `fr` alias is deprecated.
 

@@ -62,4 +62,15 @@ in
     ICON_THEME = "Papirus";
     QS_ICON_THEME = "Papirus";
   };
+
+  # Seed Noctalia settings on first activation. Noctalia writes back to this file
+  # when the user changes things in the in-shell settings UI, so we only copy if
+  # the user file does not yet exist — keeping the repo version as the default
+  # without clobbering live UI changes.
+  home.activation.seedNoctaliaSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    target="$HOME/.local/state/noctalia/settings.toml"
+    if [ ! -e "$target" ]; then
+      $DRY_RUN_CMD install -Dm644 ${../config/noctalia/settings.toml} "$target"
+    fi
+  '';
 }

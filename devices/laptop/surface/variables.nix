@@ -2,7 +2,7 @@
 # flags belong inline in default.nix as workstation.<feature>.enable.
 {
   gitUsername = "mavnezz";
-  gitEmail = "sirjuls44@github.com";
+  gitEmail = "github.com@stuch.me";
 
   # Niri output scale — surface is HiDPI 1.5x
   niriOutputScale = 1.5;

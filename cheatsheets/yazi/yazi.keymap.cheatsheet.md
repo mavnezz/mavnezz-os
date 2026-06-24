@@ -1,4 +1,4 @@
-# Yazi Keymap — ddubsOS (Human-friendly)
+# Yazi Keymap (Human-friendly)
 
 ## 🧭 Navigation
 - k / Up — Move up

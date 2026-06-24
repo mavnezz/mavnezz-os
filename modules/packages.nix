@@ -6,7 +6,6 @@
 }:
 let
   cfg = config.workstation.baseline.packages;
-  future-cursors = pkgs.callPackage ../pkgs/future-cursor.nix { };
   toolsPackages = with pkgs; [
     # sensei defaults
     yubikey-manager
@@ -36,7 +35,6 @@ let
     speedtest
     unzip
     parallel
-    future-cursors
     # mavnezz CLI grab-bag
     appimage-run
     bat

@@ -1,5 +1,5 @@
 {
-  description = "Black Don OS — sensei-style devices/ layout";
+  description = "mavnezz-os — devices/ layout";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";

@@ -14,6 +14,8 @@ in
   config = lib.mkIf cfg.enable {
     programs.niri.enable = true;
 
+    services.gvfs.enable = true;
+
     qt = {
       enable = true;
     };
