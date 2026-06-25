@@ -292,9 +292,9 @@ binds {
     Mod+Shift+C { center-visible-columns; }
 
     Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
+    Mod+numbersign { set-column-width "+10%"; }
     Mod+Shift+Minus { set-window-height "-10%"; }
-    Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+Shift+numbersign { set-window-height "+10%"; }
 
     // Floating / tabbed display
     Mod+V       { toggle-window-floating; }
