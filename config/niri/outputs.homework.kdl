@@ -1,5 +1,21 @@
-// homework — single ultrawide monitor. Niri uses the preferred mode and
-// scale 1 by default; add an explicit `output "<name>" { ... }` block here
-// if mode/scale/position tweaks are needed.
+// homework — Samsung C49HG9x ultrawide primary; Acer B247W mounted above,
+// slightly offset to the left of center.
 //
-// Discover the connected output name with `niri msg outputs`.
+// Logical coordinates are top-left. Samsung sits at y=0; Acer (1200px tall)
+// is placed at y=-1200 so its bottom edge aligns with the Samsung top edge.
+// Samsung center is at x=1920, so a centered Acer would have x=960 — we
+// shift it further left to match the physical mount.
+//
+// Run `niri msg outputs` to inspect names and modes.
+
+output "Samsung Electric Company C49HG9x HNTR502751" {
+    mode "3840x1080@143.999"
+    position x=0 y=0
+    scale 1
+}
+
+output "Acer Technologies B247W TD3EE0018552" {
+    mode "1920x1200@59.950"
+    position x=500 y=-1200
+    scale 1
+}
