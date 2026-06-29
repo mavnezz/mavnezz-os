@@ -21,7 +21,10 @@ in
         qemu.swtpm.enable = true;
       };
       spiceUSBRedirection.enable = true;
-      docker.enable = true;
+      docker = {
+        enable = true;
+        package = pkgs.docker_29;
+      };
     };
 
     services = {

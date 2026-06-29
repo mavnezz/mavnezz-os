@@ -6,35 +6,33 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
-NIX_FILE="$REPO_DIR/modules/core/snapmaker-orca.nix"
+NIX_FILE="$REPO_DIR/modules/mavnezz/printers3d.nix"
+BLOCK_START='snapmaker-orca = mkSlicer {'
+BLOCK_END='^  };'
 
 echo "🔍 Searching for latest Snapmaker OrcaSlicer release with Linux AppImage..."
 
-# Walk the most recent releases and pick the newest one that has a Linux AppImage
-# (upstream stopped shipping AppImages in some releases — flatpak/zip only)
 RELEASES=$(curl -s "https://api.github.com/repos/Snapmaker/OrcaSlicer/releases?per_page=20")
 
 FOUND=$(echo "$RELEASES" | jq -r '
     [ .[]
       | select(.assets | any(.name | test("Linux.*AppImage$"; "i")))
       | { version: (.tag_name | ltrimstr("v")),
-          url:     (.assets[] | select(.name | test("Linux.*AppImage$"; "i")) | .browser_download_url),
-          filename:(.assets[] | select(.name | test("Linux.*AppImage$"; "i")) | .name) }
+          url:     (.assets[] | select(.name | test("Linux.*AppImage$"; "i")) | .browser_download_url) }
     ] | first // empty
 ')
 
 if [ -z "$FOUND" ]; then
     echo "❌ No release with a Linux AppImage found in the last 20 releases"
-    echo "   Please check: https://github.com/Snapmaker/OrcaSlicer/releases"
     exit 1
 fi
 
 LATEST_VERSION=$(echo "$FOUND" | jq -r '.version')
 APPIMAGE_URL=$(echo "$FOUND" | jq -r '.url')
-APPIMAGE_FILENAME=$(echo "$FOUND" | jq -r '.filename')
 
-# Get current version from nix file
-CURRENT_VERSION=$(grep 'version = "' "$NIX_FILE" | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
+# Extract current version from the snapmaker-orca block only
+CURRENT_VERSION=$(awk "/$BLOCK_START/,/$BLOCK_END/" "$NIX_FILE" \
+    | grep 'version = "' | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
 
 echo "📦 Current version:        $CURRENT_VERSION"
 echo "🆕 Latest with AppImage:   $LATEST_VERSION"
@@ -55,29 +53,26 @@ if [ -z "$NEW_HASH" ]; then
     exit 1
 fi
 
+OLD_HASH=$(awk "/$BLOCK_START/,/$BLOCK_END/" "$NIX_FILE" \
+    | grep 'sha256 = "' | head -1 | sed 's/.*sha256 = "\([^"]*\)".*/\1/')
+OLD_URL=$(awk "/$BLOCK_START/,/$BLOCK_END/" "$NIX_FILE" \
+    | grep 'url = "' | head -1 | sed 's/.*url = "\([^"]*\)".*/\1/')
+
 echo "🔐 New hash: $NEW_HASH"
 echo ""
 echo "📝 Updating $NIX_FILE..."
 
-# Build templated filename so the nix file keeps using ${version}
-# shellcheck disable=SC2016  # literal ${version} is intentional — written into the .nix file
-VERSION_PLACEHOLDER='${version}'
-TEMPLATED_FILENAME="${APPIMAGE_FILENAME//$LATEST_VERSION/$VERSION_PLACEHOLDER}"
-
-# Update version
-sed -i "s|version = \"$CURRENT_VERSION\"|version = \"$LATEST_VERSION\"|" "$NIX_FILE"
-
-# Update hash
-OLD_HASH=$(grep 'sha256 = "' "$NIX_FILE" | head -1 | sed 's/.*sha256 = "\([^"]*\)".*/\1/')
-sed -i "s|sha256 = \"$OLD_HASH\"|sha256 = \"$NEW_HASH\"|" "$NIX_FILE"
-
-# Replace the AppImage filename portion of the URL (last path segment)
-sed -i "s|/Snapmaker_Orca[^\"]*\.AppImage|/$TEMPLATED_FILENAME|" "$NIX_FILE"
+# Range-addressed sed: only touch lines inside the snapmaker-orca block
+sed -i "/$BLOCK_START/,/$BLOCK_END/ {
+  s|version = \"$CURRENT_VERSION\"|version = \"$LATEST_VERSION\"|
+  s|sha256 = \"$OLD_HASH\"|sha256 = \"$NEW_HASH\"|
+  s|url = \"$OLD_URL\"|url = \"$APPIMAGE_URL\"|
+}" "$NIX_FILE"
 
 echo ""
 echo "✅ Updated Snapmaker OrcaSlicer from $CURRENT_VERSION to $LATEST_VERSION"
 echo ""
 echo "Next steps:"
-echo "  1. dcli rebuild     # Apply changes"
+echo "  1. dcli rebuild"
 echo "  2. dcli commit \"Update Snapmaker OrcaSlicer to $LATEST_VERSION\""
 echo "  3. dcli push"
