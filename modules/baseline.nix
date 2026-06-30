@@ -32,6 +32,7 @@ in
     hardware.enableAllFirmware = true;
 
     networking.networkmanager.enable = true;
+    environment.systemPackages = [ pkgs.networkmanagerapplet ];
 
     nix.gc = {
       automatic = true;

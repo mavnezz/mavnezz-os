@@ -3,6 +3,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -23,5 +24,6 @@ in
       openFirewall = true;
     };
     services.ipp-usb.enable = true;
+    environment.systemPackages = [ pkgs.system-config-printer ];
   };
 }
