@@ -32,7 +32,16 @@ in
     hardware.enableAllFirmware = true;
 
     networking.networkmanager.enable = true;
-    environment.systemPackages = [ pkgs.networkmanagerapplet ];
+    # Ship nm-connection-editor (VPN import GUI) but strip the nm-applet
+    # XDG autostart — the tray applet stalls on DBus GetAll and takes
+    # Noctalia's Wayland loop down with it on VPN state changes.
+    environment.systemPackages = [
+      (pkgs.networkmanagerapplet.overrideAttrs (old: {
+        postInstall = (old.postInstall or "") + ''
+          rm -f $out/etc/xdg/autostart/nm-applet.desktop
+        '';
+      }))
+    ];
 
     nix.gc = {
       automatic = true;
