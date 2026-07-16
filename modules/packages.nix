@@ -29,6 +29,7 @@ let
     pciutils
     file
     dig
+    poppler-utils
     oh-my-zsh
     autojump
     screen
