@@ -160,6 +160,15 @@ window-rule {
     default-floating-position x=0 y=14.5 relative-to="top"
 }
 
+// Bitwarden Chrome extension popup — always float, don't tile beside browser.
+window-rule {
+    match app-id=r#"^chrome-nngceckbapebfimnlniiiahkandclblb-Default$"#
+    open-floating true
+    default-column-width { fixed 380; }
+    default-window-height { fixed 600; }
+    default-floating-position x=-24 y=48 relative-to="top-right"
+}
+
 binds {
 
     Mod+Shift+Slash { show-hotkey-overlay; }
