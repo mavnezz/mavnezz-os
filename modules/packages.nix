@@ -30,6 +30,7 @@ let
     file
     dig
     poppler-utils
+    superfile
     oh-my-zsh
     autojump
     screen

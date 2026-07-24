@@ -51,4 +51,14 @@
       uris = [ "qemu:///system" ];
     };
   };
+
+  xdg.desktopEntries.superfile = {
+    name = "Superfile";
+    comment = "Terminal file manager";
+    icon = "system-file-manager";
+    exec = "ghostty -e superfile";
+    terminal = false;
+    type = "Application";
+    categories = [ "Utility" "FileManager" ];
+  };
 }
