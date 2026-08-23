@@ -28,6 +28,10 @@ in
       "gtk-application-prefer-dark-theme" = true;
     };
 
+    # 26.05 changed the gtk4.theme default from config.gtk.theme to null;
+    # keep theming GTK4 apps with our GTK theme (Tokyonight-Dark).
+    gtk4.theme = config.gtk.theme;
+
     gtk4.extraConfig = {
       "gtk-application-prefer-dark-theme" = true;
     };
