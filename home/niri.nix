@@ -49,7 +49,10 @@ in
     "gtk-4.0/gtk.css".force = true;
     "niri/config.kdl".source = niriConfig;
     "niri/outputs.kdl".source = niriOutputs;
-    "niri/noctalia.kdl".source = ../config/niri/noctalia.kdl;
+    # niri/noctalia.kdl is intentionally NOT symlinked here: Noctalia's "niri"
+    # template owns that file at runtime (apply.sh writes it, undo.sh removes
+    # it). A read-only store symlink fought with that and left config.kdl's
+    # include dangling. We seed it copy-if-absent below instead.
     "ghostty/config".source = ../config/ghostty/tokyo-night.ghostty;
   };
 
@@ -77,6 +80,17 @@ in
     target="$HOME/.local/state/noctalia/settings.toml"
     if [ ! -e "$target" ]; then
       $DRY_RUN_CMD install -Dm644 ${../config/noctalia/settings.toml} "$target"
+    fi
+  '';
+
+  # Seed niri's noctalia.kdl colors copy-if-absent as a WRITABLE file, so
+  # config.kdl's `include "./noctalia.kdl"` always resolves even before
+  # Noctalia's niri template applies (or if it is toggled off). When the niri
+  # template is enabled, Noctalia overwrites this with the active color scheme.
+  home.activation.seedNiriNoctaliaColors = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    target="$HOME/.config/niri/noctalia.kdl"
+    if [ ! -e "$target" ]; then
+      $DRY_RUN_CMD install -Dm644 ${../config/niri/noctalia.kdl} "$target"
     fi
   '';
 }
