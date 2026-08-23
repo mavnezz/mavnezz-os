@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Update Snapmaker OrcaSlicer to the latest release that ships a Linux AppImage
+# (plain, or zipped as Snapmaker_Orca_Linux_ubuntu_*.zip since v2.3.3)
 # Usage: ./scripts/update-snapmaker-orca.sh
 
 set -e
@@ -7,18 +8,19 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
 NIX_FILE="$REPO_DIR/modules/mavnezz/printers3d.nix"
-BLOCK_START='snapmaker-orca = mkSlicer {'
+BLOCK_START='snapmaker-orca = let'
 BLOCK_END='^  };'
+ASSET_REGEX='Linux.*AppImage$|Linux_ubuntu.*\.zip$'
 
 echo "🔍 Searching for latest Snapmaker OrcaSlicer release with Linux AppImage..."
 
 RELEASES=$(curl -s "https://api.github.com/repos/Snapmaker/OrcaSlicer/releases?per_page=20")
 
-FOUND=$(echo "$RELEASES" | jq -r '
+FOUND=$(echo "$RELEASES" | jq -r --arg re "$ASSET_REGEX" '
     [ .[]
-      | select(.assets | any(.name | test("Linux.*AppImage$"; "i")))
+      | select(.assets | any(.name | test($re; "i")))
       | { version: (.tag_name | ltrimstr("v")),
-          url:     (.assets[] | select(.name | test("Linux.*AppImage$"; "i")) | .browser_download_url) }
+          url:     ([ .assets[] | select(.name | test($re; "i")) | .browser_download_url ] | first) }
     ] | first // empty
 ')
 

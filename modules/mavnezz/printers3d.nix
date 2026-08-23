@@ -57,14 +57,19 @@ let
     };
   };
 
-  snapmaker-orca = mkSlicer {
-    pname = "snapmaker-orca";
-    version = "2.3.0";
-    desktopName = "Snapmaker Orca";
-    src = pkgs.fetchurl {
-      url = "https://github.com/Snapmaker/OrcaSlicer/releases/download/v2.3.0/Snapmaker_Orca_Linux_AppImage_Ubuntu2404_V2.3.0_Beta.AppImage";
-      sha256 = "16xhv34gbi6w6i9asjw80w866yscd94qfkm46ysxx1ak1vf6wryk";
+  # Since v2.3.3 upstream ships the Linux AppImage inside a zip (next to Flatpak bundles)
+  snapmaker-orca = let
+    zipSrc = pkgs.fetchurl {
+      url = "https://github.com/Snapmaker/OrcaSlicer/releases/download/v2.3.5/Snapmaker_Orca_Linux_ubuntu_2404_V2.3.5.zip";
+      sha256 = "1fwl96var9vkg4i1zngsrhg9a78l1lnivg2nzbhlabhfqzciwdib";
     };
+  in mkSlicer {
+    pname = "snapmaker-orca";
+    version = "2.3.5";
+    desktopName = "Snapmaker Orca";
+    src = pkgs.runCommand "snapmaker-orca.AppImage" { nativeBuildInputs = [ pkgs.unzip ]; } ''
+      unzip -p ${zipSrc} '*.AppImage' > $out
+    '';
   };
 in
 {
