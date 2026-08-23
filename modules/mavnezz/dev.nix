@@ -69,7 +69,7 @@ in
       # Nix LSP / formatter
       nixd
       nil
-      nixfmt-rfc-style
+      nixfmt
     ] ++ [
       pkgs-unstable.claude-code
     ];

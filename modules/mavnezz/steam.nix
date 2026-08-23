@@ -31,7 +31,7 @@ in
       package = pkgs.steam.override {
         extraPkgs = p: with p; [
           libusb1 udev SDL2
-          xorg.libXcursor xorg.libXi xorg.libXinerama xorg.libXScrnSaver
+          libxcursor libxi libxinerama libxscrnsaver
         ];
       };
     };
