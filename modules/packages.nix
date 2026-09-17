@@ -38,6 +38,7 @@ let
     unzip
     parallel
     # mavnezz CLI grab-bag
+    angryipscanner
     appimage-run
     bat
     bc
