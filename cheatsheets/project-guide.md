@@ -1,7 +1,7 @@
 # Project Guide — mavnezz-os
 
 Scope
-- A reproducible NixOS flake tailored for desktop and laptop systems with a shared Home Manager layer (Niri compositor + Noctalia shell, Ghostty terminal, Zsh, scripts).
+- A reproducible NixOS flake tailored for desktop systems with a shared Home Manager layer (Niri compositor + Noctalia shell, Ghostty terminal, Zsh, scripts).
 - Repo location is expected at ~/mavnezz-os. If you place it elsewhere, update the appropriate configuration files to the new path.
 
 Quick commands
@@ -48,7 +48,7 @@ High-level architecture
   - niri.nix: GTK/Qt theming, cursor, session env, selects per-host Niri KDL config from config/niri/
   - common.nix, zsh.nix, vscode.nix, scripts/: shell, editor, helper scripts (including dcli)
 - config/niri/
-  - config.desktop.kdl / config.laptop.kdl: per-host Niri configs
+  - config.desktop.kdl: shared Niri config; outputs.<host>.kdl: per-host monitor layout
   - noctalia.kdl: Noctalia shell configuration
 
 Where to change what

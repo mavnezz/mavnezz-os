@@ -8,7 +8,7 @@ Welcome! This guide is for users who are new to Nix and want to make common, saf
 - `devices/<form>/<hostname>/`: Per‑machine NixOS module — toggles features via `workstation.*` options and imports `hardware.nix`.
 - `modules/`: Reusable building blocks. `modules/packages.nix` holds the shared baseline package set; `modules/niri.nix` wires up the compositor and shell.
 - `home/`: Shared Home Manager imports (`niri.nix`, `common.nix`, `zsh.nix`, ...).
-- `config/niri/`: Niri compositor configs (`config.desktop.kdl`, `config.laptop.kdl`) and Noctalia shell config (`noctalia.kdl`).
+- `config/niri/`: Niri compositor config (`config.desktop.kdl`), per-host monitor layout (`outputs.<host>.kdl`) and Noctalia shell config (`noctalia.kdl`).
 
 ## Installing packages
 
@@ -22,7 +22,7 @@ Edit `modules/packages.nix` and add the package to the relevant list (`toolsPack
 
 ## Monitor settings (per host)
 
-Edit `config/niri/config.desktop.kdl` (or `config.laptop.kdl` for laptops) and adjust the `output` block:
+Edit `config/niri/outputs.<host>.kdl` and adjust the `output` block:
 
 ```kdl
 output "DP-1" {
@@ -34,7 +34,7 @@ output "DP-1" {
 
 ## Change Niri keybindings
 
-Edit the `binds {}` section in `config/niri/config.desktop.kdl` (or `config.laptop.kdl`). For example:
+Edit the `binds {}` section in `config/niri/config.desktop.kdl`. For example:
 
 ```kdl
 Mod+Return { spawn "ghostty"; }

@@ -117,7 +117,7 @@ dcli deploy homework
 
 ### Managing Multiple Computers
 ```bash
-# On your laptop (surface)
+# On the current host
 fr                    # Quick rebuild current host
 
 # Switch to desktop configuration (if managing remotely)

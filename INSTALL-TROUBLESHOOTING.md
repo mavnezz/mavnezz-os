@@ -85,7 +85,7 @@ nix-shell -p git pciutils
 
 **Solution:** Confirm the hostname matches a directory under `devices/<form>/`:
 ```bash
-ls devices/desktop/ devices/laptop/
+ls devices/desktop/
 ```
 
 The hostname passed to `nixos-rebuild --flake .#<name>` must exist in `nixosConfigurations` in `flake.nix`.
@@ -163,7 +163,7 @@ Gather:
    cd ~/mavnezz-os
    git log --oneline -5
    git status
-   ls devices/desktop devices/laptop
+   ls devices/desktop
    ```
 
 3. **Error logs:** save the full error output.

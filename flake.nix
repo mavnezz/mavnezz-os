@@ -65,10 +65,6 @@
 
   in {
     nixosConfigurations = {
-      surface = mkWorkstation {
-        deviceModule = ./devices/laptop/surface/default.nix;
-        inherit hmImports;
-      };
       work = mkWorkstation {
         deviceModule = ./devices/desktop/work/default.nix;
         inherit hmImports;

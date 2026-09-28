@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-mavnezz-os is a flake-based NixOS configuration that manages multiple computers (desktop + laptop) from a single repo. It's centred around the Niri scrollable-tiling Wayland compositor with the Noctalia shell.
+mavnezz-os is a flake-based NixOS configuration that manages multiple desktop computers from a single repo. It's centred around the Niri scrollable-tiling Wayland compositor with the Noctalia shell.
 
 ## Common Development Commands
 
@@ -66,10 +66,10 @@ dcli trim
 - **Modular design**: Core system modules, drivers, and home-manager configs are separated
 
 ### Key Directories
-- `devices/desktop/`, `devices/laptop/`: Per-machine NixOS modules (hardware.nix + default.nix)
+- `devices/desktop/`: Per-machine NixOS modules (hardware.nix + default.nix)
 - `modules/`: System modules (`niri.nix`, `packages.nix`, etc.) keyed by `workstation.*` options
 - `home/`: Home-manager user environment (`niri.nix`, `common.nix`, `zsh.nix`, `vscode.nix`, `scripts/`)
-- `config/niri/`: Niri compositor KDL configs (`config.desktop.kdl`, `config.laptop.kdl`, `noctalia.kdl`)
+- `config/niri/`: Niri compositor KDL configs (`config.desktop.kdl`, `outputs.<host>.kdl`, `noctalia.kdl`)
 - `pkgs/`: Custom Nix derivations
 
 ### Configuration Flow
@@ -81,7 +81,7 @@ dcli trim
 ### Flake Configuration (`flake.nix`)
 - Inputs: `nixpkgs` 25.11, `nixpkgs-unstable`, `home-manager`, `nixos-hardware`, `noctalia`
 - Creates host configurations using the `mkWorkstation` helper function
-- Hosts: `homework`, `work`, `surface`
+- Hosts: `homework`, `work`
 
 ## dcli Command Line Tool
 
@@ -113,7 +113,7 @@ mavnezz-os includes a custom CLI utility (`dcli`) for system management:
 ### Adding New Hosts
 1. Create a new directory under `devices/<form>/<host>/` with `default.nix` and `hardware.nix`
 2. Generate hardware config: `nixos-generate-config --show-hardware-config > ./devices/<form>/<host>/hardware.nix`
-3. Add a Niri config if the host needs one that differs from `config.desktop.kdl`/`config.laptop.kdl`
+3. Add `config/niri/outputs.<host>.kdl` — `home/niri.nix` reads it per host and the build fails without it
 4. Add the host to `nixosConfigurations` in `flake.nix`
 5. Test build: `dcli build NEW-HOST`
 
@@ -125,7 +125,7 @@ mavnezz-os includes a custom CLI utility (`dcli`) for system management:
 
 ### Desktop Customization
 - Wallpapers: Add to `wallpapers/`
-- Niri configs: Edit `config/niri/config.desktop.kdl` / `config.laptop.kdl`
+- Niri configs: Edit `config/niri/config.desktop.kdl`; per-host outputs live in `outputs.<host>.kdl`
 - Noctalia shell config: `config/niri/noctalia.kdl`
 
 ### Hardware Configuration Updates

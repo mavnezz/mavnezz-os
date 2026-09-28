@@ -6,7 +6,7 @@ Common questions and solutions for managing a mavnezz-os system.
 
 ### **❄ What is mavnezz-os?**
 
-mavnezz-os is a personal flake-based NixOS configuration that manages multiple machines (desktop + laptop) from a single repo, built around the Niri scrollable-tiling Wayland compositor with the Noctalia shell.
+mavnezz-os is a personal flake-based NixOS configuration that manages multiple desktop machines from a single repo, built around the Niri scrollable-tiling Wayland compositor with the Noctalia shell.
 
 **Key Features:**
 - Multi-host configuration management
@@ -64,7 +64,7 @@ sudo nixos-rebuild switch --flake .#<hostname>
 
 ### **🖥️ How do I configure multiple monitors?**
 
-Edit the relevant Niri KDL config (`config/niri/config.desktop.kdl` or `config.laptop.kdl`) and add/adjust `output` blocks:
+Edit the host's Niri outputs file (`config/niri/outputs.<host>.kdl`) and add/adjust `output` blocks:
 
 ```kdl
 output "DP-2" {

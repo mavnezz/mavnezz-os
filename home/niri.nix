@@ -6,9 +6,7 @@
   ...
 }:
 let
-  niriConfig = if hostName == "surface"
-    then ../config/niri/config.laptop.kdl
-    else ../config/niri/config.desktop.kdl;
+  niriConfig = ../config/niri/config.desktop.kdl;
   niriOutputs = ../config/niri + "/outputs.${hostName}.kdl";
 in
 {
