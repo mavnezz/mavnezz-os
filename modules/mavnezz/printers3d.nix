@@ -57,19 +57,26 @@ let
     };
   };
 
-  # Since v2.3.3 upstream ships the Linux AppImage inside a zip (next to Flatpak bundles)
+  # Upstream alternates between a bare .AppImage asset and a zipped one
+  # (Snapmaker_Orca_Linux_ubuntu_*.zip, as in v2.3.3) - unwrap only the zip case,
+  # since update-snapmaker-orca.sh accepts either asset.
   snapmaker-orca = let
-    zipSrc = pkgs.fetchurl {
-      url = "https://github.com/Snapmaker/OrcaSlicer/releases/download/v2.3.5/Snapmaker_Orca_Linux_ubuntu_2404_V2.3.5.zip";
-      sha256 = "1fwl96var9vkg4i1zngsrhg9a78l1lnivg2nzbhlabhfqzciwdib";
+    url = "https://github.com/Snapmaker/OrcaSlicer/releases/download/v2.4.0/Snapmaker_Orca_Linux_AppImage_Ubuntu2404_V2.4.0.AppImage";
+    fetched = pkgs.fetchurl {
+      inherit url;
+      sha256 = "0pmpi5y5iahffiymjfw8k3mk8w1j3jff7yl2s109dxdbbdb3h0s1";
     };
   in mkSlicer {
     pname = "snapmaker-orca";
-    version = "2.3.5";
+    version = "2.4.0";
     desktopName = "Snapmaker Orca";
-    src = pkgs.runCommand "snapmaker-orca.AppImage" { nativeBuildInputs = [ pkgs.unzip ]; } ''
-      unzip -p ${zipSrc} '*.AppImage' > $out
-    '';
+    src =
+      if lib.hasSuffix ".zip" url then
+        pkgs.runCommand "snapmaker-orca.AppImage" { nativeBuildInputs = [ pkgs.unzip ]; } ''
+          unzip -p ${fetched} '*.AppImage' > $out
+        ''
+      else
+        fetched;
   };
 in
 {
