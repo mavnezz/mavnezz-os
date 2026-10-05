@@ -124,6 +124,10 @@ in
 
     programs.dconf.enable = true;
 
+    # Partition/format GUI. Talks to udisks2 over D-Bus and authorises each
+    # operation through polkit, so the GUI itself stays unprivileged.
+    programs.gnome-disks.enable = true;
+
     programs.zsh.enable = true;
     environment.pathsToLink = [ "/share/zsh" ];
 
@@ -133,6 +137,7 @@ in
       libinput.enable = true;
       upower.enable = true;
       power-profiles-daemon.enable = true;
+      udisks2.enable = true; # gnome-disks backend
       pipewire = {
         enable = true;
         pulse.enable = true;
