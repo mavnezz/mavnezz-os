@@ -7,19 +7,9 @@
     package = pkgs.vscodium;
     profiles = {
       default = {
-        extensions = with pkgs.vscode-extensions; [
-          anthropic.claude-code
-          jnoortheen.nix-ide
-          jeff-hykin.better-nix-syntax
-          mads-hartmann.bash-ide-vscode
-          tamasfe.even-better-toml
-          zainchen.json
-          ms-python.python
-          ms-dotnettools.csharp
-          bmewburn.vscode-intelephense-client
-          ms-azuretools.vscode-docker
-          esbenp.prettier-vscode
-        ];
+        # Shared with the official VS Code build (see home/vscode-extensions.nix
+        # and modules/mavnezz/dev.nix) so both editors carry the same set.
+        extensions = import ./vscode-extensions.nix pkgs;
 
         userSettings = {
           # The extension's bundled `claude` binary is dynamically linked and

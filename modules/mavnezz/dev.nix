@@ -44,6 +44,20 @@ in
     ];
 
     environment.systemPackages = with pkgs; [
+      # Official VS Code, installed system-wide alongside home-manager's
+      # VSCodium (same buildEnv would collide). Unlike VSCodium it registers the
+      # vscode:// scheme and runs Microsoft's Remote-SSH extension natively.
+      # Extensions are baked in: the shared set (same as VSCodium) plus the
+      # Remote-SSH trio for the vscode-remote deep links. vscode-with-extensions
+      # pins --extensions-dir to the store, so this list is authoritative (add
+      # extensions via the repo, not the in-app marketplace).
+      (vscode-with-extensions.override {
+        vscodeExtensions = (import ../../home/vscode-extensions.nix pkgs) ++ (with vscode-extensions; [
+          ms-vscode-remote.remote-ssh
+          ms-vscode-remote.remote-ssh-edit
+          ms-vscode.remote-explorer
+        ]);
+      })
       # .NET
       dotnet-sdk_10
       # PHP / Laravel
@@ -73,5 +87,16 @@ in
     ] ++ [
       pkgs-unstable.claude-code
     ];
+
+    # Reach the dev VM by its .local name for SSH / VS Code Remote-SSH. A
+    # networking.hosts (/etc/hosts) entry would NOT work: nss-mdns'
+    # "mdns4_minimal [NOTFOUND=return]" intercepts *.local before files is
+    # consulted. Pinning it in the system ssh client config sidesteps name
+    # resolution entirely and leaves ~/.ssh/config untouched.
+    programs.ssh.extraConfig = ''
+      Host devvm.local
+        HostName 192.168.1.9
+        User sirjuls44
+    '';
   };
 }
