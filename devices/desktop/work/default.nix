@@ -40,7 +40,7 @@ in
 
     mavnezz = {
       printers3d.enable = true;
-      printing.enable   = false;
+      printing.enable   = true;
       dev.enable        = true;
       comms.enable      = true;
       browsers.enable   = true;
