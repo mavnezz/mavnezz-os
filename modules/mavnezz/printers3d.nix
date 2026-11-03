@@ -1,5 +1,5 @@
-# Bambu Studio + Snapmaker OrcaSlicer as upstream-provided AppImages,
-# rewrapped via appimageTools so they run on NixOS with the right libs.
+# Bambu Studio + Snapmaker Orca + upstream OrcaSlicer as upstream-provided
+# AppImages, rewrapped via appimageTools so they run on NixOS with the right libs.
 # Update via the scripts under scripts/update-{bambu-studio,snapmaker-orca}.sh.
 {
   config,
@@ -78,13 +78,23 @@ let
       else
         fetched;
   };
+
+  orca-slicer = mkSlicer {
+    pname = "orca-slicer";
+    version = "2.4.2";
+    desktopName = "OrcaSlicer";
+    src = pkgs.fetchurl {
+      url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/v2.4.2/OrcaSlicer_Linux_AppImage_Ubuntu2404_V2.4.2.AppImage";
+      sha256 = "1z99y202in1dagx94lpd76j8ykwrizaaqxv3zcnwvbn1xb4bhbyi";
+    };
+  };
 in
 {
   options.workstation.mavnezz.printers3d.enable =
-    lib.mkEnableOption "Bambu Studio + Snapmaker OrcaSlicer for 3D printing";
+    lib.mkEnableOption "Bambu Studio + Snapmaker Orca + OrcaSlicer for 3D printing";
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ bambu-studio snapmaker-orca ];
+    environment.systemPackages = [ bambu-studio snapmaker-orca orca-slicer ];
     xdg.mime.enable = true;
   };
 }
