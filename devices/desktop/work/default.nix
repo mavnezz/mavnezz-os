@@ -51,6 +51,24 @@ in
     };
   };
 
+  # Kyocera TASKalfa 3554ci: IPP on the device answers "service unavailable",
+  # so it is driven over raw port 9100 with the kyodialog PPD.
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "TASKalfa_3554ci";
+        description = "Kyocera TASKalfa 3554ci";
+        deviceUri = "socket://192.168.0.15:9100";
+        model = "Kyocera/Kyocera_TASKalfa_3554ci.ppd";
+        ppdOptions = {
+          PageSize = "A4";
+          Duplex = "None";
+        };
+      }
+    ];
+    ensureDefaultPrinter = "TASKalfa_3554ci";
+  };
+
   home-manager.users.sirjuls44.programs.git.settings.user = {
     name  = vars.gitUsername;
     email = vars.gitEmail;

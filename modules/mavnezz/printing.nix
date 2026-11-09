@@ -17,6 +17,7 @@ in
     services.printing.enable = true;
     services.printing.drivers = [
       # add manufacturer-specific drivers here when needed (e.g. pkgs.hplipWithPlugin)
+      (pkgs.callPackage ../../pkgs/cups-kyodialog/package.nix { })
     ];
     services.avahi = {
       enable = true;
