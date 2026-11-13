@@ -15,6 +15,13 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    # Parametric 3D CAD (pure Rust). Not in nixpkgs; upstream ships a flake with
+    # a real package output, so we consume it directly.
+    solidcraft = {
+      url = "github:tangency-labs/solidcraft";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... } @ inputs:
