@@ -51,13 +51,17 @@ in
       # Remote-SSH trio for the vscode-remote deep links. vscode-with-extensions
       # pins --extensions-dir to the store, so this list is authoritative (add
       # extensions via the repo, not the in-app marketplace).
-      (vscode-with-extensions.override {
-        vscodeExtensions = (import ../../home/vscode-extensions.nix pkgs) ++ (with vscode-extensions; [
-          ms-vscode-remote.remote-ssh
-          ms-vscode-remote.remote-ssh-edit
-          ms-vscode.remote-explorer
-        ]);
-      })
+      #
+      # TEMPORARILY DISABLED: vscode 1.144.0 in current nixpkgs fails its
+      # patchPhase (rm of a @vscode/ripgrep path that no longer exists). Re-enable
+      # once nixpkgs ships a working vscode. VSCodium (home/vscode.nix) is unaffected.
+      # (vscode-with-extensions.override {
+      #   vscodeExtensions = (import ../../home/vscode-extensions.nix pkgs) ++ (with vscode-extensions; [
+      #     ms-vscode-remote.remote-ssh
+      #     ms-vscode-remote.remote-ssh-edit
+      #     ms-vscode.remote-explorer
+      #   ]);
+      # })
       # .NET
       dotnet-sdk_10
       # PHP / Laravel
