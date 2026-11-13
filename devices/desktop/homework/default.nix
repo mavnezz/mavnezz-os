@@ -39,6 +39,7 @@ in
     gpu.intel.enable = true;
 
     mavnezz = {
+      craftApps.enable  = true;
       printers3d.enable = true;
       printing.enable   = true;
       dev.enable        = true;

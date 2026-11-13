@@ -7,6 +7,7 @@
   imports = [
     ./browsers.nix
     ./comms.nix
+    ./craft-apps.nix
     ./dev.nix
     ./media.nix
     ./printers3d.nix
