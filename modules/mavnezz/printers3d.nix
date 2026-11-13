@@ -1,5 +1,5 @@
-# Bambu Studio + Snapmaker Orca + upstream OrcaSlicer as upstream-provided
-# AppImages, rewrapped via appimageTools so they run on NixOS with the right libs.
+# Bambu Studio + Snapmaker Orca as upstream-provided AppImages, rewrapped via
+# appimageTools so they run on NixOS with the right libs.
 # Update via the scripts under scripts/update-{bambu-studio,snapmaker-orca}.sh.
 {
   config,
@@ -61,14 +61,14 @@ let
   # (Snapmaker_Orca_Linux_ubuntu_*.zip, as in v2.3.3) - unwrap only the zip case,
   # since update-snapmaker-orca.sh accepts either asset.
   snapmaker-orca = let
-    url = "https://github.com/Snapmaker/OrcaSlicer/releases/download/v2.4.0/Snapmaker_Orca_Linux_AppImage_Ubuntu2404_V2.4.0.AppImage";
+    url = "https://github.com/Snapmaker/OrcaSlicer/releases/download/v2.4.1/Snapmaker_Orca_Linux_AppImage_Ubuntu2404_V2.4.1.AppImage";
     fetched = pkgs.fetchurl {
       inherit url;
-      sha256 = "0pmpi5y5iahffiymjfw8k3mk8w1j3jff7yl2s109dxdbbdb3h0s1";
+      sha256 = "01ncsabzld7iw5nr88cprsvz73yjaly8fnpwrmxs58q45pi1fl9b";
     };
   in mkSlicer {
     pname = "snapmaker-orca";
-    version = "2.4.0";
+    version = "2.4.1";
     desktopName = "Snapmaker Orca";
     src =
       if lib.hasSuffix ".zip" url then
@@ -78,23 +78,13 @@ let
       else
         fetched;
   };
-
-  orca-slicer = mkSlicer {
-    pname = "orca-slicer";
-    version = "2.4.2";
-    desktopName = "OrcaSlicer";
-    src = pkgs.fetchurl {
-      url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/v2.4.2/OrcaSlicer_Linux_AppImage_Ubuntu2404_V2.4.2.AppImage";
-      sha256 = "1z99y202in1dagx94lpd76j8ykwrizaaqxv3zcnwvbn1xb4bhbyi";
-    };
-  };
 in
 {
   options.workstation.mavnezz.printers3d.enable =
-    lib.mkEnableOption "Bambu Studio + Snapmaker Orca + OrcaSlicer for 3D printing";
+    lib.mkEnableOption "Bambu Studio + Snapmaker Orca for 3D printing";
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ bambu-studio snapmaker-orca orca-slicer ];
+    environment.systemPackages = [ bambu-studio snapmaker-orca ];
     xdg.mime.enable = true;
   };
 }
