@@ -27,6 +27,12 @@ in
       };
       kernelPackages = pkgs.linuxPackages_latest;
       kernelModules = [ "uvcvideo" ];
+
+      # Pulls exfatprogs into system.fsPackages, which is what feeds the
+      # systemd PATH udisks2 reads its mkfs.* helpers from - putting the
+      # package in environment.systemPackages alone would not let GNOME Disks
+      # offer exFAT. The kernel driver is in-tree since 5.7.
+      supportedFilesystems.exfat = true;
     };
 
     hardware.enableAllFirmware = true;
