@@ -3,7 +3,8 @@
 # The storytold "Craft" suite lives in nixpkgs-unstable (not yet in 26.05
 # stable), so those come from the pkgs-unstable input. SolidCraft is not in
 # nixpkgs at all but ships its own flake, consumed via the solidcraft input.
-# Both are forwarded via specialArgs by the flake.
+# Both are forwarded via specialArgs by the flake. MailCraft has neither, so it
+# is repackaged from its release tarball in pkgs/mailcraft.
 {
   config,
   lib,
@@ -17,7 +18,7 @@ let
 in
 {
   options.workstation.mavnezz.craftApps.enable =
-    lib.mkEnableOption "Craft office suite, PhotoCraft and SolidCraft";
+    lib.mkEnableOption "Craft office suite, PhotoCraft, SolidCraft and MailCraft";
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = (with pkgs-unstable; [
@@ -29,6 +30,8 @@ in
     ]) ++ [
       # Parametric 3D CAD (Fusion/SolidWorks-like), built from its own flake.
       inputs.solidcraft.packages.${pkgs.stdenv.hostPlatform.system}.default
+      # Email client with calendar and contacts (beta).
+      (pkgs.callPackage ../../pkgs/mailcraft/package.nix { })
     ];
   };
 }
