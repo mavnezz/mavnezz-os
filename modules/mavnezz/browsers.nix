@@ -1,5 +1,4 @@
-# Browsers: Chromium (open), Google Chrome (mandatory for some work tools),
-# Vivaldi (preferred daily driver).
+# Browsers: Google Chrome only, set as the default browser.
 {
   config,
   lib,
@@ -11,18 +10,24 @@ let
 in
 {
   options.workstation.mavnezz.browsers.enable =
-    lib.mkEnableOption "Web browsers (Chromium, Google Chrome, Vivaldi)";
+    lib.mkEnableOption "Web browser (Google Chrome, set as default)";
 
   config = lib.mkIf cfg.enable {
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       "google-chrome"
-      "vivaldi"
     ];
 
-    environment.systemPackages = with pkgs; [
-      chromium
-      google-chrome
-      vivaldi
-    ];
+    environment.systemPackages = [ pkgs.google-chrome ];
+
+    # System-wide default (/etc/xdg/mimeapps.list); ~/.config/mimeapps.list
+    # stays writable and still wins for any key it sets.
+    xdg.mime.defaultApplications = lib.genAttrs [
+      "text/html"
+      "application/xhtml+xml"
+      "x-scheme-handler/http"
+      "x-scheme-handler/https"
+      "x-scheme-handler/about"
+      "x-scheme-handler/unknown"
+    ] (_: "google-chrome.desktop");
   };
 }
