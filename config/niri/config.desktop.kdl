@@ -115,13 +115,16 @@ window-rule {
     default-floating-position x=0 y=14.5 relative-to="top"
 }
 
-// Bitwarden Chrome extension popup — always float, don't tile beside browser.
+// Bitwarden Chrome extension popout (opens when unlocking) — always float,
+// don't tile beside browser. Width matches Bitwarden's "wide" setting (480);
+// Chrome resizes to that after mapping and niri keeps the top-left fixed.
+// Offsets count inward from the anchor corner, so x must be positive.
 window-rule {
     match app-id=r#"^chrome-nngceckbapebfimnlniiiahkandclblb-Default$"#
     open-floating true
-    default-column-width { fixed 380; }
+    default-column-width { fixed 480; }
     default-window-height { fixed 600; }
-    default-floating-position x=-24 y=48 relative-to="top-right"
+    default-floating-position x=24 y=48 relative-to="top-right"
 }
 
 window-rule {
