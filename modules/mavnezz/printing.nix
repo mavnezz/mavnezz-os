@@ -18,6 +18,7 @@ in
     services.printing.drivers = [
       # add manufacturer-specific drivers here when needed (e.g. pkgs.hplipWithPlugin)
       (pkgs.callPackage ../../pkgs/cups-kyodialog/package.nix { })
+      pkgs.cups-dymo # LabelWriter 450 (lw450.ppd) + raster2dymolw filter
     ];
     services.avahi = {
       enable = true;
@@ -25,6 +26,11 @@ in
       openFirewall = true;
     };
     services.ipp-usb.enable = true;
-    environment.systemPackages = [ pkgs.system-config-printer ];
+    environment.systemPackages = [
+      pkgs.system-config-printer
+      # Label designer: carries the Dymo 11356 template (41x89mm) among 1759
+      # others, plus glabels-batch-qt for printing series from the CLI.
+      pkgs.glabels-qt
+    ];
   };
 }
