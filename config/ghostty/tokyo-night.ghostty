@@ -8,6 +8,20 @@ window-save-state = always
 adjust-cell-height = 10%
 #maximize = true
 
+# Announce ourselves as xterm-256color instead of xterm-ghostty. Every ncurses
+# install already carries that entry, so curses apps (nano, htop) work on any
+# remote host without installing terminfo there first. The cost is Ghostty's own
+# terminfo extras, notably the xterm prefix that makes vim turn on
+# modifyOtherKeys, so some Ctrl+Shift combinations stop being distinguishable.
+term = xterm-256color
+
+# Kept as a second layer, and the safety net if `term` above is ever reverted:
+# ssh-terminfo installs Ghostty's terminfo on remotes via infocmp/tic and caches
+# which hosts are done (ghostty +ssh-cache), ssh-env propagates COLORTERM and
+# friends. Both are off in Ghostty's defaults; the other values here are the
+# defaults, repeated because this setting replaces the whole list.
+shell-integration-features = cursor,no-sudo,title,ssh-env,ssh-terminfo,path
+
 ### keybinds ###
 keybind = ctrl+alt+a=new_tab
 keybind = ctrl+alt+z=close_tab:this
